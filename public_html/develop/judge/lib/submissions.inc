@@ -91,20 +91,20 @@ if($row = mysql_fetch_assoc($sql_result)){
 			}
 		}
 	}
-	// echo "</center>\n";
+	echo "</center>\n";
 
-	// $sql = "SELECT * ";
-	// $sql .= "FROM CONTEST_CONFIG ";
+	$sql = "SELECT * ";
+	$sql .= "FROM SITE ";
 
-	// $sql_result = mysql_query($sql);
+	$sql_result = mysql_query($sql);
 
-	// if(!$sql_result){
-		// sql_error($sql);
-	// }
+	if(!$sql_result){
+		sql_error($sql);
+	}
 	
-	// $row = mysql_fetch_assoc($sql_result);
-	// $start_ts = $row['START_TS'];
-	// $team_show = $row['TEAM_SHOW'];
+	$row = mysql_fetch_assoc($sql_result);
+	$start_ts = $row['START_TS'];
+	$team_show = $row['TEAM_SHOW'];
 
 	#get the teams for the drop down box
 	if ($team_show == 1)
