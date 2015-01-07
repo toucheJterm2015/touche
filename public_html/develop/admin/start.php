@@ -20,7 +20,7 @@ function make_file_readable($fp, $missing_files) {
 	}
 }
 
-if($_POST['submit'] == 'Start' || $_POST['test_submit'] == 'Test Start')
+if($_POST['submit'] )# == 'Start' || $_POST['submit'] == 'Test Start')
 {
 /* code for changing type of team to the contest state, move as needed or delete
 	if($_POST['submit'] == 'Start'){
@@ -40,9 +40,10 @@ if($_POST['submit'] == 'Start' || $_POST['test_submit'] == 'Test Start')
 			echo "error with sql.";
 		}
 	}*/
-	$cur_hour = date(G);
-	$cur_minute = date(i);
-	$cur_second = date(s);
+	
+	$cur_hour = date('G'); #G, i, and s are format flags for the date() function
+	$cur_minute = date('i');
+	$cur_second = date('s');
 #	system("crontab $base_dir/start_contest.crontab", $result);
 	system("touch $base_dir/../active-contests/$contest_name", $result);
         if ($result != 0){
@@ -87,7 +88,7 @@ if($_POST['submit'] == 'Start' || $_POST['test_submit'] == 'Test Start')
 				print "<div class='error'><br>Grevious error: update failed: " . mysql_error() . "\n<br>$sql</div>";
 			}
 /*			
-			if($_POST['test_submit'] == 'Test Start'){
+			if($_POST['submit'] == 'Test Start'){
 				$sql = "UPDATE SITE WHERE SITE_ID = 1 set HAS_STARTED = '2'";
 				$result = mysql_query($sql);
 				if(!$result)
@@ -122,7 +123,7 @@ if($_POST['submit'] == 'Start' || $_POST['test_submit'] == 'Test Start')
 				print "<div class='error'><br>Grevious error: update failed: " . mysql_error() . "\n<br>$sql</div>";
 			}
 			
-			if($_POST['test_submit'] == 'Test Start'){
+			if($_POST['submit'] == 'Test Start'){
 			$sql = "UPDATE SITE set HAS_STARTED = '2' WHERE SITE_ID = '$site'";
 			$result = mysql_query($sql);
 			if(!$result)
@@ -196,7 +197,7 @@ while($row = mysql_fetch_assoc($result))
 }
 
 echo "<tr><td align=center><button class=\"btn btn-success\" type=submit name=submit value=Start>Official Start</button></td>";
-echo "<td align=center><button class=\"btn btn-warning\" type=submit name=test_submit value='Test Start'>Test Start</button></td></tr>";
+echo "<td align=center><button class=\"btn btn-warning\" type=submit name=submit value='Test Start'>Test Start</button></td></tr>";
 
 
 echo "</table>\n";
