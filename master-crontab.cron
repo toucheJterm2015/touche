@@ -3,11 +3,11 @@
 # Copyright (C) 2013 Jonathan Geisler
 # Replace touche with the correct user folder
 
-if [ `ls /home/touche/active-contests | wc -l` -gt 0 ] ; then
-	for file in /home/touche/active-contests/*
+if [ `ls /home/mschmock/active-contests | wc -l` -gt 0 ] ; then
+	for file in /home/mschmock/active-contests/*
 	do
 		dir=`basename $file`
-		cd "/home/touche/public_html/$dir/judge"
+		cd "/home/mschmock/public_html/$dir/judge"
 		./cronScript.php > ./errorLog.txt &
 	done
 fi
