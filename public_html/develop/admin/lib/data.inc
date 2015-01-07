@@ -28,6 +28,7 @@ if (!$contest_info) {
     exit;
 }
 */
+$row = mysql_fetch_assoc($contest_info);
 
 if (mysql_num_rows($contest_info) > 0) {
     $contest_host = $row['HOST'];
