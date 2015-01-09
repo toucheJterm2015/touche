@@ -46,7 +46,6 @@ include_once("lib/create.inc");
                 echo "<form  class='form-horizontal' method=POST action=createcontest2.php>\n";
 
                 //Name of Contest Host/Organization field
-
                 echo "<div class='row'>";
                 echo "<div class='col-xs-4'>";
                 echo "<div class='col-sm-10'>";
