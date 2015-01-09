@@ -1,0 +1,110 @@
+JUDGE---------------------------------------------------------------------
+NOT PAGE SPECIFIC
+Login functionality
+2 Timers
+Queued submissions counter displays 
+	-Submissions are cleared from the queue appropriately
+Unanswered clarifications counter 
+Time of day (top of the page)
+Displaying submissions (applies to multiple, but not all pages)
+	-Judge submission link
+		-Link exists
+		-Judging submission page
+			-All submission description info is correct
+			-"Final result" drop down default value is equal to auto response
+			-Information from comparing .out file to submission is correct
+	-Filtering
+		-Unfiltered results all display  
+		-Filter by problem
+			-Links exist for all problems
+			-Clicking a link causes correct results to be displayed 
+			-Short descriptions are displayed for all, except selected link
+			-*Tool tips containing the full name for the links of shortened names
+		-Filter by team 
+			-Drop down contains all teams
+			-Filtering causes correct results to be displayed
+			-Selecting a different option from the drop down automatically refreshes
+	-Correct information
+		-Problem information is correct
+		-Team ID or name is correct
+			-*Team ID or name is correctly displayed (depending on the "show team names to judges" check box)
+		-Auto response is accurate
+
+JUDGE SUBMISSIONS
+Only un-judged submissions are shown
+
+REVIEW JUDGEMENTS
+Only submissions judged by the current user are shown (is there only one judge account?)
+
+PROBLEMS
+All problems are displayed
+Problem name and number are correct
+HTML and PDF files display correctly
+
+CLARIFICATIONS
+Both "sort by" options sort results correctly
+*All clarifications that should be shown are shown (not sure what is failing about this)
+Pending, all, general, and $problemName links filter clarifications correctly
+All problem names are shown as an option for sorting
+"Respond to Clarification" and "Ignore Clarification" links exist where they should and work
+All information is correct, and correctly displayed for each shown clarification 
+Make new clarification/respond to clarification 
+	-Link exists from clarifications page
+	-All  problems, as well as general, are available from dropdown
+	-Question is correctly displayed (or not displayed)
+	
+STANDINGS
+All problems displayed
+Time taken for each problem displayed correctly (not displayed for incomplete questions)
+Problems completed displayed correctly
+"Points" (in minutes) displayed correctly
+Team name, ranking displayed correctly
+Teams ordered by ranking
+Category filter works
+
+CONTESTANT---------------------------------------------------------------
+NOT PAGE SPECIFIC
+Both times display correctly
+
+PROBLEMS PAGE
+Problem number and name are with the correct documents
+html and pdf display correctly
+
+
+SUBMISSIONS
+File upload 
+	-works (no corruptions, etc.)
+	-File stays paired with correct problem
+Submissions are displayed correctly
+	-Correct coloring
+	-Correct information (especially the result from judge)
+
+STANDINGS
+Team name stays connected to correct standings
+All problems are displayed
+Minutes displayed for each problem correct
+Number of attempts for each problem displayed correctly
+Number of problems complete displayed correctly 
+"Score" (in minutes) displayed correctly
+Freeze stops rankings and other team's scores from changing
+Category filter works
+
+CLARIFICATIONS
+Filters work
+All information is correct
+
+README
+Document displays
+Update document??
+	
+
+
+	
+
+
+
+
+
+	
+
+ 
