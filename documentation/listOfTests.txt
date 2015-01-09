@@ -1,0 +1,274 @@
+FEATURES AND FUNCTIONALITY (aka things to write tests for)
+ - for creating the contest and administration pages
+
+ALL PAGES?
+- shall have header bar
+ - header bar shall contain logo
+ 
+CREATE CONTEST (1)
+- initial page shall support login to system
+- shall have header text "ADMIN" once logged in (is this really necessary? In current implementation, it's hidden in the header bar)
+- shall have text "Initial Contest Setup"
+- page shall have short text input fields for the contest name, contest host name, database host name, and a password to use with the database host
+ -* the page shall test for valid input in all four fields before allowing the form to submit
+- page shall have submit button
+ -* submit button shall work iff all fields are filled in (OR trying to submit w/o all fields filled in shall pop up with an error rather than going to the next page)
+ - if all fields are filled in, submit button shall POST to createcontest2.php
+ 
+CREATE CONTEST (2)
+- the script shall create folders with the given name of the contest to run the contest from
+ - it shall copy relevant files from the repository to the appropriate places in the contest directory
+ - it shall remove any unexpected files from the new folders (in case of a repeat contest name calling on existing folders)
+ - it shall make the "jails" folders that contestent-submitted code will be executed within
+  - these folders shall also be emptied, then have appropriate contents copied over from the repository
+ - the script shall set the permissions of the newly created contest folders to 755 (rwx for the server, just r-x for everyone else)
+ - the script shall set up the database:
+  - with the specified database password
+  - in the designated location
+  - with the partial information from the CREATE CONTEST (1) page
+- the script shall change placeholder text in the readme to a current URL that links to the current contest
+- if any of these functions fail, the page shall print an error message
+- the page shall include a link to the administration login page (if the contest is created successfully)
+
+ADMIN PAGES
+
+Index
+- page shall support login to system
+ - for new administrators, the username and password are both "admin" (if changed, reflect change in the readmes and/or instruction documents)
+ - for returning administrators, the username and password shall be whatever they have set
+
+ChangePW
+- the page shall contain the text "Login Information" in a statement suggesting change. (The current "Please change your Login Information" is sufficient, as is the fragment/title "New Login Information")
+- the page shall contain a form with one short text input field and two password input fields and a submit button
+ - the fields shall check whether their input is valid (the two password fields must have the same content)
+ - the submit button shall have the text "Change"
+ - the submit button shall refresh the page if the form does not have valid input
+ - the submit button shall POST to (this same php document)? if the input is valid, then redirect to the SetupContest page
+  - this action shall update the database of user/password combinations
+
+ALL FOLLOWING ADMIN PAGES
+- the page shall contain the text ADMIN in the header bar
+- the page shall have a menu bar with all the pages admins are expected to visit (it's pretty much in place; I'm not listing them out here)
+- the page shall have a display stating the amount of time until standings are frozen, or the statement "Standings are now frozen", as well as the time until the contest ends or the statement "contest is over"
+- any time a submit button is pressed, the page shall pop up with a good or bad alert message to communicate whether the expected behaviour happened or not
+  
+SetupContest
+- the page shall have a form which includes the following
+ - titles for sub-sections (Edit Contest Info, Customize Judging Experience)
+ - text entry fields, pre-filled with existing information from the database:
+  - the host's name
+  - the contest's name
+  - the full directory path the server uses to access contest files
+  - the judge account username and password (password field)
+ - number entry fields, pre-filled with either the default values or whatever has been set in the database:
+  - time (hour, minute, second) until standings are frozen
+  - time (hour, minute, second) until the contest closes
+  - penalty for incorrect submissions (in minutes)
+ - check boxes to turn on or off the following options
+  - ignore standard error (default off)
+  - check for forbidden words in all three languages (default on for any with files in the FORBIDDEN table of the database, off otherwise)
+  - automatically include headers for all three langauges (default ?)
+  - display team names to judge (default off)
+ - a submit button which will always post data to the database
+-the submit button currently redirects to the SetupProblems page. It is the only button with a redirect. Do we actually want that?
+
+SetupProblems
+- the page shall have a form which contains the following:
+ - a title with the text "Add or Edit Problems"
+ - short text entry fields for the problem name, shortened problem name, and problem location (as in where to put it on the server? Not actually sure what this is)
+ - long text entry field for notes about the problem
+ - upload form for the html version of the problem
+ - upload form for the pdf version of the problem
+ - submit button which shall POST the new problem to the database
+- the page shall have a second form which contains the following:
+ - title text "Edit Current Problems"
+ - a table of existing problems with these on each row:
+  - the problem name
+  - a link with the text "Edit"
+   - this shall GET the data for that problem from the database and fill it into the first form
+  - a link with text "Delete"
+   - this link shall DELETE the problem from the database
+- if any of the database connections fail, the page shall contain an error message
+
+SetupDataSets
+- the page shall contain a table of all the problems, with the following for each problem:
+ - the problem name
+ - a link to add a new data set (which will GET the problem (based on its id) from the database and fill in the following form)
+ - on individual lines, any I/O data sets already submitted for that problem and a link to delete each one (which obviously sends a DELETE request to the database)
+- the page shall contain a form which initially contains the text "Select a problem to add a data set"
+- once a problem has been selected, this form shall have two file-upload inputs
+ - these are respectively for the input and output files the contestants' programs will be interacting with/trying to match
+ - the submit button shall produce an error if either of the uploaders do not have files chosen, or if there is an actual error in saving the files to the database
+ - otherwise, the submit button shall upload the pair to the database and upload the table described before
+ - the form shall also have a title, which is the name of the problem the data sets are being added to
+ 
+SetupSite
+- the page shall have a form with the title "Add a new site" and a single short entry text field for the site name
+ - the submit button on this form shall POST to the database
+- the page shall also have a table with the title "Edit a Site"
+ - the table shall include, on each row:
+  - the name of the site
+  - a link to Edit the site (GET)
+  - a link to Delete the site (DELETE)
+- when the Edit link is clicked, the form's title shall include the site name
+ - the form shall auto-fill the original name of the site
+ - if the user renames the site and clicks submit, the new name is stored (POST) in the database
+
+SetupTeams
+- the page shall have a form containing the following:
+ - a title "Add a new team"
+ - short text entry fields for all of the following:
+  - team name
+  - organization name
+  - username
+  - password (yes, this is plain text - you need to be able to give the random password to the team)
+   - the password field shall be filled with a randomly generated string of letters and numbers
+  - coach
+  - contestant 1, 2, 3, and alternate
+  - team email
+ - a drop-down box to pick a site from the ones which have been created
+ - a checkbox to indicate whether a team is a test team - one which is eligible to compete in the contest when it has been test-started before it is officially started
+ - the submit button for this form shall POST to the server regardless of whether all the fields are filled in or not
+  - the submit button shall check for valid entries for the username and password options before allowing the request to go through
+- the page shall have a table of teams with the following on each row:
+ - the team name
+ - a link which will GET the team for editing
+ - a link which will DELETE the team from the database
+ - some indication whether the team is a test team or not (I don't like the current implementation that the "Test Team?" column looks like a bunch of checkboxes but a user cannot click on them)
+ - when the Edit link is clicked, the form shall auto-fill its fields from the database, including the checkbox indicating whether the team is a test team
+ 
+SetupCategories
+- the page shall have a form to add a new category (title, short text entry, submit button)
+- the page shall have a 
+ - the submit button shall only work if there is text in the text entry field. If there is, the form shall POST to the database and create the new category
+- the page shall include a table of categorys with a title as well as the standard category name, edit (GET), and DELETE options
+ - when Edit is pressed, the form shall put the name of the category into the lone text field and change the title and button text to "Rename category"
+- the form shall have a second table/form, this one with:
+ - column titles "Team Name" and then the names of categories such that all categories have a column
+ - the rows shall be the team names such that every team is included in the "Team Name" column
+ - the rest of the fields in the table shall be editable checkboxes
+ - when the submit button is pressed, the form shall POST and DELETE as necessary to the CATEGORY_TEAMS table in the database
+ 
+SetupHeaders / SetupForbidden (these are so similar, I'm not writing the requirements twice. Change precise text as needed)
+- the page shall have a table with"
+ - the title "Edit Current [Headers/Forbidden]"
+ - each row shall have an accepted language name and an option to edit(GET), but no DELETE (if you want to add or remove accepted languages, you have to go back and add or remove from the source code)
+ - Edit shall GET the document for the appropriate language from the database and put it into a form on the page
+  - this form shall have a title indicating which language's document is being edited and the text of the document in a long text entry field
+  - the submit button shall POST the edited document back to the database
+
+Misc
+- the page shall contain a form (table with many sub-forms?) with the following:
+ - hh:mm:ss time entry field to input an amount of time to extend the contest by + submit button
+ - a button to "clear" the contest (probably needs a better name; it just reverts all sites to inactive and removes submissions. Problem , team, category, and other data will remain as it was
+ - a short entry text field and button to clone a contest (when given a name, clones all contest data from one database to another in the same system, otherwise does nothing)
+ - a short entry text field which takes an administrator's email and a button that promises to compress the problem files and send them to the entered email address
+  - this should definitely send an email unless something goes wrong, at which point it produces an error message for the user
+ - an option (button) to regrade the autoresponses for the problems, which we will write functionality for soon, and idk yet how exactly we'll want it to work
+
+Start
+- the page shall contain a table with a title "Start Contest" and the following:
+ - in each row, the name of a site, started or not
+  - if the site has not yet been officially started, a checkbox on the same row
+  - if the site has been test-started, text indicating that status as well as the checkbox
+ - two submit buttons (one for start, one for test-start) which will start/teststart the contest for all sites with checked boxes.
+
+
+JUDGE---------------------------------------------------------------------
+NOT PAGE SPECIFIC
+Login functionality
+2 Timers
+Queued submissions counter displays 
+	-Submissions are cleared from the queue appropriately
+Unanswered clarifications counter 
+Time of day (top of the page)
+Displaying submissions (applies to multiple, but not all pages)
+	-Judge submission link
+		-Link exists
+		-Judging submission page
+			-All submission description info is correct
+			-"Final result" drop down default value is equal to auto response
+			-Information from comparing .out file to submission is correct
+	-Filtering
+		-Unfiltered results all display  
+		-Filter by problem
+			-Links exist for all problems
+			-Clicking a link causes correct results to be displayed 
+			-Short descriptions are displayed for all, except selected link
+			-*Tool tips containing the full name for the links of shortened names
+		-Filter by team 
+			-Drop down contains all teams
+			-Filtering causes correct results to be displayed
+			-Selecting a different option from the drop down automatically refreshes
+	-Correct information
+		-Problem information is correct
+		-Team ID or name is correct
+			-*Team ID or name is correctly displayed (depending on the "show team names to judges" check box)
+		-Auto response is accurate
+
+JUDGE SUBMISSIONS
+Only un-judged submissions are shown
+
+REVIEW JUDGEMENTS
+Only submissions judged by the current user are shown (is there only one judge account?)
+
+PROBLEMS
+All problems are displayed
+Problem name and number are correct
+HTML and PDF files display correctly
+
+CLARIFICATIONS
+Both "sort by" options sort results correctly
+*All clarifications that should be shown are shown (not sure what is failing about this)
+Pending, all, general, and $problemName links filter clarifications correctly
+All problem names are shown as an option for sorting
+"Respond to Clarification" and "Ignore Clarification" links exist where they should and work
+All information is correct, and correctly displayed for each shown clarification 
+Make new clarification/respond to clarification 
+	-Link exists from clarifications page
+	-All  problems, as well as general, are available from dropdown
+	-Question is correctly displayed (or not displayed)
+	
+STANDINGS
+All problems displayed
+Time taken for each problem displayed correctly (not displayed for incomplete questions)
+Problems completed displayed correctly
+"Points" (in minutes) displayed correctly
+Team name, ranking displayed correctly
+Teams ordered by ranking
+Category filter works
+
+CONTESTANT---------------------------------------------------------------
+NOT PAGE SPECIFIC
+Both times display correctly
+
+PROBLEMS PAGE
+Problem number and name are with the correct documents
+html and pdf display correctly
+
+
+SUBMISSIONS
+File upload 
+	-works (no corruptions, etc.)
+	-File stays paired with correct problem
+Submissions are displayed correctly
+	-Correct coloring
+	-Correct information (especially the result from judge)
+
+STANDINGS
+Team name stays connected to correct standings
+All problems are displayed
+Minutes displayed for each problem correct
+Number of attempts for each problem displayed correctly
+Number of problems complete displayed correctly 
+"Score" (in minutes) displayed correctly
+Freeze stops rankings and other team's scores from changing
+Category filter works
+
+CLARIFICATIONS
+Filters work
+All information is correct
+
+README
+Document displays
+Update document??
