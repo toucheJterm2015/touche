@@ -33,6 +33,8 @@ Team filter not set correctly if not a POST - judge/submissions.inc line 52
 
 judge/clarification_response_form.php has not been bootstrap-ed
 
+if resizing page and the nav bar winds up on 2+ rows, when resized bigger, each button becomes its own row
+
 
 FEATURE
 Validate in and out files right after upload
