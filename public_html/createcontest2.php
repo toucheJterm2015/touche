@@ -57,7 +57,9 @@ echo "<p>Clearing folders . . . ";
    $cmd2 .= $contest_dir;
    $cmd2 .= "/data/*";
    system($cmd2, $result);
+   
  echo "Result: $result \n";
+
    $cmd2 = "rm -rf ";
    $cmd2 .= $contest_dir;
    $cmd2 .= "/judged/*";
@@ -235,14 +237,13 @@ if (!$connect_good) {
     print "Sorry.  Database selection failed.";
     exit;
 }
-
 $contest_info = mysql_query("INSERT INTO SITE (CONTEST_HOST, CONTEST_NAME, FREEZE_DELAY, CONTEST_END_DELAY, BASE_DIRECTORY, JUDGE_USER) VALUES ('$CONTEST_HOST', '$contest', '14400', '18000', '$base_dir', 'judge')");
+
 if (!$contest_info) {
     print "Sorry.  Database request (INSERT) failed.";
     exit;
 }
 echo"Finished.</p>";
-
 
 #-----------editing database.inc----------------------------------
 echo "<p>Editing Settings . . . ";
@@ -302,7 +303,6 @@ if ($result) {
     echo "Unable to set contest directory permissions<br />";
 }
 echo "Finished.</p>";
-
 
 #-------------------------edit readme-----------------------------
 $fhdl = fopen("readme/inst.html", "r") OR die("Error with opening file");
