@@ -3,7 +3,7 @@ testing the automated system, we need:
 - multiple sites
 - multiple teams
 - multiple problems
-- sample submissions that get the proper response, in each language to demonstrate (that's 27 total submissions to produce. We can split it up somehow. Each take a language?)
+- sample submissions that get the proper response, in each language to demonstrate (that's 30 total submissions to produce. We can split it up somehow. Each take a language?)
  - Forbidden word (may omit for Java, or we could add a forbidden word for it for testing)
  - Undefined file type (should this be combined with wrong file type (like if someone submits a .txt) or would that be part of the Error: Reason Unknown category?)
  - Compile error (this is easiest. Delete semicolons!)
