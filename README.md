@@ -2,7 +2,7 @@ OLD README //Not sure if this still applies to touche
 
 
 For directions on installing Touche, see that installation docs in the
-top level of this repository.
+/documentation/ folder of this repository.
 
 Using the Touche repository in a live system.  After cloning the
 repository, it should be in a location that is not directly accessible
@@ -14,11 +14,12 @@ is in a directory named src):
 
     ln -s ~/src/develop develop
     ln -s ~/src/public_html public_html/develop
-    ln ~/src/createcontest.php public_html/createcontest.php
-    ln ~/src/createcontest2.php public_html/createcontest2.php
-    ln ~/src/index.html public_html/index.html
-    ln -s ~/src/dbcreate.sql public_html/dbcreate.sql
-    ln -s ~/src/readme public_html/readme
+	ln -s ~/src/public_html/lib/
+    ln ~/src/public_html/createcontest.php public_html/createcontest.php
+    ln ~/src/public_html/createcontest2.php public_html/createcontest2.php
+    ln ~/src/public_html/index.html public_html/index.html
+    ln -s ~/src/public_html/dbcreate.sql public_html/dbcreate.sql
+    ln -s ~/src/public_html/readme public_html/readme
 
 We cannot use symbolic links for the `createcontest` scripts since
 they are directly executed by the web server and we use suexec, which
