@@ -5,7 +5,7 @@
  
  import java.util.*;
  
- class prob1{
+ class Main{
 	
 	public static void main(String[] args){
 		

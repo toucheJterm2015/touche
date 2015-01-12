@@ -10,8 +10,8 @@ testing the automated system, we need:
  - Exceeds time limit (infinite loop)
  - Incorrect Output (write an irrelevant program?)
  - Format Error (how would the automated system catch this?)
- - Runtime Error (can't think of how to deliberately cause this one, but I'm sure we'll stumble across something)
- - Other Error (Reason Unknown/unspecified)
+ - Runtime Error
+ - Other Error (Reason Unknown/unspecified) We NEED to figure out what errors qualify for this.
  - proper output/accepted
 shove this all into the database and fake timestamps (dbcreate.sql has examples of similar code to what we'll probably use)
 
