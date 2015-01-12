@@ -16,9 +16,9 @@
 		int guess = Integer.parseInt(user_num);
 		
 		if(guess!=ANSWER)//the "right" code would have these trying to be equal. This is the opposite.
-			System.out.println(""+true);
+			System.out.println("true");
 		else
-			System.out.println(""+false);
+			System.out.println("false");
 	
 	}
  }
