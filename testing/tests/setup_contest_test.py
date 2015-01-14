@@ -1,65 +1,96 @@
-#! usr/bin/python
-
-# this is just the presence-of (buttons, text fields...) tests, not the functionality tests
 # -*- coding: utf-8 -*-
-from selenium import selenium
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support.ui import Select
+from selenium.common.exceptions import NoSuchElementException
+from selenium.common.exceptions import NoAlertPresentException
 import unittest, time, re
 
-class setup_contest_test(unittest.TestCase):
+class SetupContestTest(unittest.TestCase):
     def setUp(self):
+        self.driver = webdriver.PhantomJS("/usr/local/bin/phantomjs")
+        self.driver.implicitly_wait(30)
+        self.base_url = "http://localhost"
         self.verificationErrors = []
-        self.selenium = selenium("localhost", 4444, "*chrome", "touche.cse.taylor.edu/~mschmock/Contest/admin/setup_teams.p")
-        self.selenium.start()
+        self.accept_next_alert = True
     
-    def test_setup_contest_test(self):
-        sel = self.selenium
-        try: self.failUnless(sel.is_element_present("name=contest_host"))
-        except AssertionError, e: self.verificationErrors.append(str(e))
-        try: self.failUnless(sel.is_element_present("name=contest_name"))
-        except AssertionError, e: self.verificationErrors.append(str(e))
-        try: self.failUnless(sel.is_element_present("name=time_penalty"))
-        except AssertionError, e: self.verificationErrors.append(str(e))
-        try: self.failUnless(sel.is_element_present("name=username"))
-        except AssertionError, e: self.verificationErrors.append(str(e))
-        try: self.failUnless(sel.is_element_present("name=base_directory"))
-        except AssertionError, e: self.verificationErrors.append(str(e))
-        try: self.failUnless(sel.is_element_present("name=stderr"))
-        except AssertionError, e: self.verificationErrors.append(str(e))
-        try: self.failUnless(sel.is_element_present("name=forbidden_c"))
-        except AssertionError, e: self.verificationErrors.append(str(e))
-        try: self.failUnless(sel.is_element_present("name=forbidden_cpp"))
-        except AssertionError, e: self.verificationErrors.append(str(e))
-        try: self.failUnless(sel.is_element_present("name=forbidden_java"))
-        except AssertionError, e: self.verificationErrors.append(str(e))
-        try: self.failUnless(sel.is_element_present("name=headers_c"))
-        except AssertionError, e: self.verificationErrors.append(str(e))
-        try: self.failUnless(sel.is_element_present("name=headers_cpp"))
-        except AssertionError, e: self.verificationErrors.append(str(e))
-        try: self.failUnless(sel.is_element_present("name=headers_java"))
-        except AssertionError, e: self.verificationErrors.append(str(e))
-        try: self.failUnless(sel.is_element_present("name=team_show"))
-        except AssertionError, e: self.verificationErrors.append(str(e))
-        try: self.failUnless(sel.is_element_present("name=password"))
-        except AssertionError, e: self.verificationErrors.append(str(e))
-        try: self.failUnless(re.search(r"^Edit[\s\S]*$", sel.get_text("css=td > h3")))
-        except AssertionError, e: self.verificationErrors.append(str(e))
-        try: self.failUnless(re.search(r"^Customize[\s\S]*$", sel.get_text("//tr[10]/td/h3")))
-        except AssertionError, e: self.verificationErrors.append(str(e))
-        try: self.failUnless(sel.is_element_present("name=freeze_hour"))
-        except AssertionError, e: self.verificationErrors.append(str(e))
-        try: self.failUnless(sel.is_element_present("name=freeze_minute"))
-        except AssertionError, e: self.verificationErrors.append(str(e))
-        try: self.failUnless(sel.is_element_present("name=freeze_second"))
-        except AssertionError, e: self.verificationErrors.append(str(e))
-        try: self.failUnless(sel.is_element_present("name=end_hour"))
-        except AssertionError, e: self.verificationErrors.append(str(e))
-        try: self.failUnless(sel.is_element_present("name=end_minute"))
-        except AssertionError, e: self.verificationErrors.append(str(e))
-        try: self.failUnless(sel.is_element_present("name=end_second"))
-        except AssertionError, e: self.verificationErrors.append(str(e))
+    def test_setup_contest(self):
+        driver = self.driver
+        
+        #should be moved to separate function, but for now when I try to do so, it breaks.
+        driver.get(self.base_url + "/~mschmock/Contest/admin/index.php")
+        user = driver.find_element_by_name("user")
+        user.clear()
+        user.send_keys("admin")
+        driver.find_element_by_name("password").clear()
+        driver.find_element_by_name("password").send_keys("password")
+        driver.find_element_by_name("submit").click()
+        #end of what should be the login function
+        
+        driver.get(self.base_url + "/~mschmock/Contest/admin/setup_contest.php")
+        try: self.assertTrue(self.is_element_present(By.CSS_SELECTOR, "div.innerglow"))
+        except AssertionError as e: self.verificationErrors.append(str(e))
+        try: self.assertTrue(self.is_element_present(By.CSS_SELECTOR, "div.table-responsive > table.table > tbody > tr"))
+        except AssertionError as e: self.verificationErrors.append(str(e))
+        try: self.assertRegexpMatches(driver.find_element_by_css_selector("div.table-responsive > table.table > tbody > tr").text, r"^Edit Contest[\s\S]*$")
+        except AssertionError as e: self.verificationErrors.append(str(e))
+        try: self.assertTrue(self.is_element_present(By.NAME, "contest_host"))
+        except AssertionError as e: self.verificationErrors.append(str(e))
+        try: self.assertTrue(self.is_element_present(By.NAME, "contest_name"))
+        except AssertionError as e: self.verificationErrors.append(str(e))
+        try: self.assertTrue(self.is_element_present(By.NAME, "base_directory"))
+        except AssertionError as e: self.verificationErrors.append(str(e))
+        try: self.assertTrue(self.is_element_present(By.NAME, "username"))
+        except AssertionError as e: self.verificationErrors.append(str(e))
+        try: self.assertTrue(self.is_element_present(By.NAME, "password"))
+        except AssertionError as e: self.verificationErrors.append(str(e))
+        try: self.assertTrue(self.is_element_present(By.NAME, "time_penalty"))
+        except AssertionError as e: self.verificationErrors.append(str(e))
+        try: self.assertTrue(self.is_element_present(By.NAME, "stderr"))
+        except AssertionError as e: self.verificationErrors.append(str(e))
+        try: self.assertTrue(self.is_element_present(By.NAME, "forbidden_c"))
+        except AssertionError as e: self.verificationErrors.append(str(e))
+        try: self.assertTrue(self.is_element_present(By.NAME, "forbidden_cpp"))
+        except AssertionError as e: self.verificationErrors.append(str(e))
+        try: self.assertTrue(self.is_element_present(By.NAME, "forbidden_java"))
+        except AssertionError as e: self.verificationErrors.append(str(e))
+        try: self.assertTrue(self.is_element_present(By.NAME, "headers_c"))
+        except AssertionError as e: self.verificationErrors.append(str(e))
+        try: self.assertTrue(self.is_element_present(By.NAME, "headers_cpp"))
+        except AssertionError as e: self.verificationErrors.append(str(e))
+        try: self.assertTrue(self.is_element_present(By.NAME, "headers_java"))
+        except AssertionError as e: self.verificationErrors.append(str(e))
+        try: self.assertTrue(self.is_element_present(By.NAME, "team_show"))
+        except AssertionError as e: self.verificationErrors.append(str(e))
+        try: self.assertRegexpMatches(driver.find_element_by_css_selector("div.innerglow").text, r"^[\s\S]*Customize[\s\S]*$")
+        except AssertionError as e: self.verificationErrors.append(str(e))
+        try: self.assertTrue(self.is_element_present(By.NAME, "B1"))
+        except AssertionError as e: self.verificationErrors.append(str(e))
+    
+    def is_element_present(self, how, what):
+        try: self.driver.find_element(by=how, value=what)
+        except NoSuchElementException, e: return False
+        return True
+    
+    def is_alert_present(self):
+        try: self.driver.switch_to_alert()
+        except NoAlertPresentException, e: return False
+        return True
+    
+    def close_alert_and_get_its_text(self):
+        try:
+            alert = self.driver.switch_to_alert()
+            alert_text = alert.text
+            if self.accept_next_alert:
+                alert.accept()
+            else:
+                alert.dismiss()
+            return alert_text
+        finally: self.accept_next_alert = True
     
     def tearDown(self):
-        self.selenium.stop()
+        self.driver.quit()
         self.assertEqual([], self.verificationErrors)
 
 if __name__ == "__main__":
