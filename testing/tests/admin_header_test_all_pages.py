@@ -10,7 +10,7 @@ from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import NoAlertPresentException
 import unittest, time, re
 
-class SetupTeamsTest(unittest.TestCase):
+class AdminHeaderTestAllPages(unittest.TestCase):
     def setUp(self):
         self.driver = webdriver.PhantomJS("/usr/local/bin/phantomjs")
         self.driver.implicitly_wait(30)
@@ -18,7 +18,7 @@ class SetupTeamsTest(unittest.TestCase):
         self.verificationErrors = []
         self.accept_next_alert = True
     
-    def test_setup_teams(self):
+    def test_admin_header_test_all_pages(self):
         driver = self.driver
         
         #should be moved to separate function, but for now when I try to do so, it breaks.
@@ -31,44 +31,62 @@ class SetupTeamsTest(unittest.TestCase):
         driver.find_element_by_name("submit").click()
         #end of what should be the login function
         
-        driver.get(self.base_url + "/~mschmock/Contest/admin/setup_teams.php")
-        try: self.assertTrue(self.is_element_present(By.NAME, "team_name"))
-        except AssertionError as e: self.verificationErrors.append(str(e))
-        try: self.assertTrue(self.is_element_present(By.NAME, "organization"))
-        except AssertionError as e: self.verificationErrors.append(str(e))
-        try: self.assertTrue(self.is_element_present(By.NAME, "username"))
-        except AssertionError as e: self.verificationErrors.append(str(e))
-        try: self.assertTrue(self.is_element_present(By.NAME, "password"))
-        except AssertionError as e: self.verificationErrors.append(str(e))
-        try: self.assertTrue(self.is_element_present(By.NAME, "coach_name"))
-        except AssertionError as e: self.verificationErrors.append(str(e))
-        try: self.assertTrue(self.is_element_present(By.NAME, "contestant_1_name"))
-        except AssertionError as e: self.verificationErrors.append(str(e))
-        try: self.assertTrue(self.is_element_present(By.NAME, "contestant_2_name"))
-        except AssertionError as e: self.verificationErrors.append(str(e))
-        try: self.assertTrue(self.is_element_present(By.NAME, "contestant_3_name"))
-        except AssertionError as e: self.verificationErrors.append(str(e))
-        try: self.assertTrue(self.is_element_present(By.NAME, "alternate_name"))
-        except AssertionError as e: self.verificationErrors.append(str(e))
-        try: self.assertTrue(self.is_element_present(By.NAME, "email"))
-        except AssertionError as e: self.verificationErrors.append(str(e))
-        try: self.assertTrue(self.is_element_present(By.NAME, "site_id"))
-        except AssertionError as e: self.verificationErrors.append(str(e))
-        try: self.assertTrue(self.is_element_present(By.NAME, "test_team"))
-        except AssertionError as e: self.verificationErrors.append(str(e))
-        try: self.assertTrue(self.is_element_present(By.NAME, "submit"))
-        except AssertionError as e: self.verificationErrors.append(str(e))
-        try: self.assertTrue(self.is_element_present(By.CSS_SELECTOR, "td > h3"))
-        except AssertionError as e: self.verificationErrors.append(str(e))
-        try: self.assertTrue(self.is_element_present(By.CSS_SELECTOR, "div.col-md-5"))
-        except AssertionError as e: self.verificationErrors.append(str(e))
-        try: self.assertTrue(self.is_element_present(By.CSS_SELECTOR, "div.col-md-6"))
-        except AssertionError as e: self.verificationErrors.append(str(e))
-        try: self.assertRegexpMatches(driver.find_element_by_css_selector("div.col-md-6").text, r"^[\s\S]*Add[\s\S]*$")
-        except AssertionError as e: self.verificationErrors.append(str(e))
-        try: self.assertRegexpMatches(driver.find_element_by_css_selector("div.col-md-5").text, r"^[\s\S]*Edit[\s\S]*$")
-        except AssertionError as e: self.verificationErrors.append(str(e))
+        self.check_each_page
+        driver.find_element_by_link_text("Problems").click()
+        self.check_each_page
+        driver.find_element_by_link_text("Data").click()
+        self.check_each_page
+        driver.find_element_by_link_text("Sites").click()
+        self.check_each_page
+        driver.find_element_by_link_text("Teams").click()
+        self.check_each_page
+        driver.find_element_by_link_text("Categories").click()
+        self.check_each_page
+        driver.find_element_by_link_text("Headers").click()
+        self.check_each_page
+        driver.find_element_by_link_text("Forbidden").click()
+        self.check_each_page
+        driver.find_element_by_link_text("Misc").click()
+        self.check_each_page
+        driver.find_element_by_link_text("Start").click()
+        self.check_each_page
+        
     
+	#this test was so repetitive, I cut the commands out and pasted them into a separate function to save space.
+    def check_each_page():
+        try: self.assertTrue(self.is_element_present(By.CSS_SELECTOR, "div.panel-body"))
+        except AssertionError as e: self.verificationErrors.append(str(e))
+        try: self.assertRegexpMatches(driver.find_element_by_css_selector("div.panel-body").text, r"^[\s\S]*Contest[\s\S]*$")
+        except AssertionError as e: self.verificationErrors.append(str(e))
+        try: self.assertTrue(self.is_element_present(By.CSS_SELECTOR, "body > div.container"))
+        except AssertionError as e: self.verificationErrors.append(str(e))
+        try: self.assertTrue(self.is_element_present(By.LINK_TEXT, "Details"))
+        except AssertionError as e: self.verificationErrors.append(str(e))
+        try: self.assertTrue(self.is_element_present(By.LINK_TEXT, "Problems"))
+        except AssertionError as e: self.verificationErrors.append(str(e))
+        try: self.assertTrue(self.is_element_present(By.LINK_TEXT, "Data"))
+        except AssertionError as e: self.verificationErrors.append(str(e))
+        try: self.assertTrue(self.is_element_present(By.LINK_TEXT, "Sites"))
+        except AssertionError as e: self.verificationErrors.append(str(e))
+        try: self.assertTrue(self.is_element_present(By.LINK_TEXT, "Teams"))
+        except AssertionError as e: self.verificationErrors.append(str(e))
+        try: self.assertTrue(self.is_element_present(By.LINK_TEXT, "Categories"))
+        except AssertionError as e: self.verificationErrors.append(str(e))
+        try: self.assertTrue(self.is_element_present(By.LINK_TEXT, "Headers"))
+        except AssertionError as e: self.verificationErrors.append(str(e))
+        try: self.assertTrue(self.is_element_present(By.LINK_TEXT, "Forbidden"))
+        except AssertionError as e: self.verificationErrors.append(str(e))
+        try: self.assertTrue(self.is_element_present(By.LINK_TEXT, "Misc"))
+        except AssertionError as e: self.verificationErrors.append(str(e))
+        try: self.assertTrue(self.is_element_present(By.LINK_TEXT, "Start"))
+        except AssertionError as e: self.verificationErrors.append(str(e))
+        try: self.assertTrue(self.is_element_present(By.CSS_SELECTOR, "h3"))
+        except AssertionError as e: self.verificationErrors.append(str(e))
+        try: self.assertTrue(self.is_element_present(By.CSS_SELECTOR, "img[alt=\"Logo\"]"))
+        except AssertionError as e: self.verificationErrors.append(str(e))
+        try: self.assertEqual("ADMIN", driver.find_element_by_css_selector("h3").text)
+        except AssertionError as e: self.verificationErrors.append(str(e))
+	
     def is_element_present(self, how, what):
         try: self.driver.find_element(by=how, value=what)
         except NoSuchElementException, e: return False
