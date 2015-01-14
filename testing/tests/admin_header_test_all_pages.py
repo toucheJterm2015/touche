@@ -31,24 +31,53 @@ class AdminHeaderTestAllPages(unittest.TestCase):
         driver.find_element_by_name("submit").click()
         #end of what should be the login function
         
+        try: self.assertEqual("Details", driver.find_element_by_xpath("//li[contains(@class, \"active\")]").text)
+        except AssertionError as e: self.verificationErrors.append(str(e))
         self.check_each_page
+        
         driver.find_element_by_link_text("Problems").click()
+        try: self.assertEqual("Problems", driver.find_element_by_xpath("//li[contains(@class, \"active\")]").text)
+        except AssertionError as e: self.verificationErrors.append(str(e))
         self.check_each_page
+        
         driver.find_element_by_link_text("Data").click()
+        try: self.assertEqual("Data", driver.find_element_by_xpath("//li[contains(@class, \"active\")]").text)
+        except AssertionError as e: self.verificationErrors.append(str(e))
         self.check_each_page
+        
         driver.find_element_by_link_text("Sites").click()
+        try: self.assertEqual("Sites", driver.find_element_by_xpath("//li[contains(@class, \"active\")]").text)
+        except AssertionError as e: self.verificationErrors.append(str(e))
         self.check_each_page
+        
         driver.find_element_by_link_text("Teams").click()
+        try: self.assertEqual("Teams", driver.find_element_by_xpath("//li[contains(@class, \"active\")]").text)
+        except AssertionError as e: self.verificationErrors.append(str(e))
         self.check_each_page
+        
         driver.find_element_by_link_text("Categories").click()
+        try: self.assertEqual("Categories", driver.find_element_by_xpath("//li[contains(@class, \"active\")]").text)
+        except AssertionError as e: self.verificationErrors.append(str(e))
         self.check_each_page
+        
         driver.find_element_by_link_text("Headers").click()
+        try: self.assertEqual("Headers", driver.find_element_by_xpath("//li[contains(@class, \"active\")]").text)
+        except AssertionError as e: self.verificationErrors.append(str(e))
         self.check_each_page
+        
         driver.find_element_by_link_text("Forbidden").click()
+        try: self.assertEqual("Forbidden", driver.find_element_by_xpath("//li[contains(@class, \"active\")]").text)
+        except AssertionError as e: self.verificationErrors.append(str(e))
         self.check_each_page
+        
         driver.find_element_by_link_text("Misc").click()
+        try: self.assertEqual("Misc", driver.find_element_by_xpath("//li[contains(@class, \"active\")]").text)
+        except AssertionError as e: self.verificationErrors.append(str(e))
         self.check_each_page
+        
         driver.find_element_by_link_text("Start").click()
+        try: self.assertEqual("Start", driver.find_element_by_xpath("//li[contains(@class, \"active\")]").text)
+        except AssertionError as e: self.verificationErrors.append(str(e))
         self.check_each_page
         
     
