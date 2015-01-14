@@ -1,3 +1,8 @@
+(enhancements from the issues log are not included, but everything else is)
+I DONT KNOW WHERE THESE GO 
+Java logs get overwritten 
+Diff output missing newlines
+
 FEATURES AND FUNCTIONALITY (aka things to write tests for)
  - for creating the contest and administration pages
 
@@ -6,6 +11,7 @@ ALL PAGES?
  - header bar shall contain logo
  
 CREATE CONTEST (1)
+- The name of the contest cannot contain certain characters (sql injection) - test thoroughly 
 - initial page shall support login to system
 - shall have header text "ADMIN" once logged in (is this really necessary? In current implementation, it's hidden in the header bar)
 - shall have text "Initial Contest Setup"
@@ -30,7 +36,7 @@ CREATE CONTEST (2)
 - if any of these functions fail, the page shall print an error message
 - the page shall include a link to the administration login page (if the contest is created successfully)
 
-ADMIN PAGES
+ADMIN PAGES----------------------------------------------------------------
 
 Index
 - page shall support login to system
@@ -65,7 +71,7 @@ SetupContest
   - time (hour, minute, second) until the contest closes
   - penalty for incorrect submissions (in minutes)
  - check boxes to turn on or off the following options
-  - ignore standard error (default off)
+  - ignore standard error (default off)(make sure functionality behind this works)
   - check for forbidden words in all three languages (default on for any with files in the FORBIDDEN table of the database, off otherwise)
   - automatically include headers for all three langauges (default ?)
   - display team names to judge (default off)
@@ -90,6 +96,9 @@ SetupProblems
   - a link with text "Delete"
    - this link shall DELETE the problem from the database
 - if any of the database connections fail, the page shall contain an error message
+- Deleting a problem and then creating another one breaks the numbering of problems (and causes problems to not be auto-judged) - test thoroughly 
+- Problem description files cannot be uploaded while creating problem, only from edit - intentional?
+- Problem description file cannot be changed once uploaded - have a test for this
 
 SetupDataSets
 - the page shall contain a table of all the problems, with the following for each problem:
@@ -102,6 +111,7 @@ SetupDataSets
  - the submit button shall produce an error if either of the uploaders do not have files chosen, or if there is an actual error in saving the files to the database
  - otherwise, the submit button shall upload the pair to the database and upload the table described before
  - the form shall also have a title, which is the name of the problem the data sets are being added to
+- Naming a data set certain things breaks things - test thoroughly
  
 SetupSite
 - the page shall have a form with the title "Add a new site" and a single short entry text field for the site name
@@ -129,6 +139,9 @@ SetupTeams
   - team email
  - a drop-down box to pick a site from the ones which have been created
  - a checkbox to indicate whether a team is a test team - one which is eligible to compete in the contest when it has been test-started before it is officially started
+- deleting a team during a running contest does not break things 
+- updating teams does not always work - test thoroughly 
+- Editing a different team, while editing a team breaks things 
  
  - the submit button for this form shall POST to the server regardless of whether all the fields are filled in or not
   - the submit button shall check for valid entries for the username and password options before allowing the request to go through
@@ -178,6 +191,7 @@ Start
 
 JUDGE---------------------------------------------------------------------
 NOT PAGE SPECIFIC
+judge/clarification_response_form.php has not been bootstrap-ed - test for this
 Login functionality
 2 Timers
 Queued submissions counter displays 
@@ -243,10 +257,16 @@ Category filter works
 CONTESTANT---------------------------------------------------------------
 NOT PAGE SPECIFIC
 Both times display correctly
+    -For the correct site 
+
+ALTERNATE SUBSTITUTION PAGE
+Page shows only when it should
+Result is stored correctly
 
 PROBLEMS PAGE
 Problem number and name are with the correct documents
 html and pdf display correctly
+Documents are not viewable for inactive contests
 
 
 SUBMISSIONS
@@ -264,7 +284,7 @@ Minutes displayed for each problem correct
 Number of attempts for each problem displayed correctly
 Number of problems complete displayed correctly 
 "Score" (in minutes) displayed correctly
-Freeze stops rankings and other team's scores from changing
+Freeze stops rankings and other team's scores from changing (freeze happens at correct time for each site)
 Category filter works
 
 CLARIFICATIONS
