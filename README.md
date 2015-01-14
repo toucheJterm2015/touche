@@ -13,13 +13,14 @@ directories are relative to the contest user and assume the repository
 is in a directory named src):
 
     ln -s ~/src/develop develop
-    ln -s ~/src/public_html public_html/develop
+    ln -s ~/src/public_html/develop public_html/develop
 	ln -s ~/src/public_html/lib/
     ln ~/src/public_html/createcontest.php public_html/createcontest.php
     ln ~/src/public_html/createcontest2.php public_html/createcontest2.php
     ln ~/src/public_html/index.html public_html/index.html
     ln -s ~/src/public_html/dbcreate.sql public_html/dbcreate.sql
     ln -s ~/src/public_html/readme public_html/readme
+    ln -s ~/src/public_html/lib public_html/lib
 
 We cannot use symbolic links for the `createcontest` scripts since
 they are directly executed by the web server and we use suexec, which
