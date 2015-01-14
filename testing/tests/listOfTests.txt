@@ -53,49 +53,50 @@ ChangePW
   - this action shall update the database of user/password combinations
 
 ALL FOLLOWING ADMIN PAGES
-- the page shall contain the text ADMIN in the header bar
-- the page shall have a menu bar with all the pages admins are expected to visit (it's pretty much in place; I'm not listing them out here)
-- the page shall have a display stating the amount of time until standings are frozen, or the statement "Standings are now frozen", as well as the time until the contest ends or the statement "contest is over"
+x the page shall contain the text ADMIN in the header bar
+x the page shall have a menu bar with all the pages admins are expected to visit (it's pretty much in place; I'm not listing them out here)
+x the page shall have a display stating the amount of time until standings are frozen, or the statement "Standings are now frozen", as well as the time until the contest ends or the statement "contest is over"
 - any time a submit button is pressed, the page shall pop up with a good or bad alert message to communicate whether the expected behaviour happened or not
   
 SetupContest
 - the page shall have a form which includes the following
- - titles for sub-sections (Edit Contest Info, Customize Judging Experience)
+ x titles for sub-sections (Edit Contest Info, Customize Judging Experience)
  - text entry fields, pre-filled with existing information from the database:
-  - the host's name
-  - the contest's name
-  - the full directory path the server uses to access contest files
-  - the judge account username and password (password field)
- - number entry fields, pre-filled with either the default values or whatever has been set in the database:
-  - time (hour, minute, second) until standings are frozen
-  - time (hour, minute, second) until the contest closes
-  - penalty for incorrect submissions (in minutes)
- - check boxes to turn on or off the following options
-  - ignore standard error (default off)(make sure functionality behind this works)
-  - check for forbidden words in all three languages (default on for any with files in the FORBIDDEN table of the database, off otherwise)
-  - automatically include headers for all three langauges (default ?)
-  - display team names to judge (default off)
+  x the host's name
+  x the contest's name
+  x the full directory path the server uses to access contest files
+  x the judge account username and password (password field)
+ x number entry fields, pre-filled with either the default values or whatever has been set in the database:
+  x time (hour, minute, second) until standings are frozen
+  x time (hour, minute, second) until the contest closes
+  x penalty for incorrect submissions (in minutes)
+ x check boxes to turn on or off the following options
+  x ignore standard error (default off)(make sure functionality behind this works)
+  x check for forbidden words in all three languages (default on for any with files in the FORBIDDEN table of the database, off otherwise)
+  x automatically include headers for all three langauges (default ?)
+  x display team names to judge (default off)
   
- - a submit button which will always POST data to the database
+ x a submit button which will always POST data to the database
 -the submit button currently redirects to the SetupProblems page. It is the only button with a redirect. Do we actually want that?
 
 SetupProblems
 - the page shall have a form which contains the following:
- - a title with the text "Add or Edit Problems"
- - short text entry fields for the problem name, shortened problem name, and problem location (as in where to put it on the server? Not actually sure what this is)
- - long text entry field for notes about the problem
+ x a title with the text "Add or Edit Problems"
+ x short text entry fields for the problem name, shortened problem name, and problem location (as in where to put it on the server? Not actually sure what this is)
+ x long text entry field for notes about the problem THIS CURRENTLY DOES NOT ALLOW APOSTROPHES WHICH MIGHT BE A PROBLEM
  - upload form for the html version of the problem
  - upload form for the pdf version of the problem
- - submit button which shall POST the new problem to the database
+ x submit button which shall POST the new problem to the database
 - the page shall have a second form which contains the following:
- - title text "Edit Current Problems"
- - a table of existing problems with these on each row:
-  - the problem name
+ x title text "Edit Current Problems"
+ x a table of existing problems with these on each row:
+  x the problem name
   - a link with the text "Edit"
    - this shall GET the data for that problem from the database and fill it into the first form
   - a link with text "Delete"
    - this link shall DELETE the problem from the database
 - if any of the database connections fail, the page shall contain an error message
+
 - Deleting a problem and then creating another one breaks the numbering of problems (and causes problems to not be auto-judged) - test thoroughly 
 - Problem description files cannot be uploaded while creating problem, only from edit - intentional?
 - Problem description file cannot be changed once uploaded - have a test for this
@@ -127,18 +128,19 @@ SetupSite
 
 SetupTeams
 - the page shall have a form containing the following:
- - a title "Add a new team"
+ x a title "Add a new team"
  - short text entry fields for all of the following:
-  - team name
-  - organization name
-  - username
-  - password (yes, this is plain text - you need to be able to give the random password to the team)
+  x team name
+  x organization name
+  x username
+  x password (yes, this is plain text - you need to be able to give the random password to the team)
    - the password field shall be filled with a randomly generated string of letters and numbers
-  - coach
-  - contestant 1, 2, 3, and alternate
-  - team email
- - a drop-down box to pick a site from the ones which have been created
- - a checkbox to indicate whether a team is a test team - one which is eligible to compete in the contest when it has been test-started before it is officially started
+  x coach
+  x contestant 1, 2, 3, and alternate
+  x team email
+ x a drop-down box to pick a site from the ones which have been created
+ x a checkbox to indicate whether a team is a test team - one which is eligible to compete in the contest when it has been test-started before it is officially started
+ 
 - deleting a team during a running contest does not break things 
 - updating teams does not always work - test thoroughly 
 - Editing a different team, while editing a team breaks things 
