@@ -5,7 +5,7 @@
  
  import java.util.*;
  
- class prob1{
+ class Main{
 	
 	public static void main(String[] args){
 		
@@ -19,9 +19,9 @@
 		int guess = Integer.parseInt(user_num);
 		
 		if(guess==ANSWER)
-			System.out.println(""+true);//the extra spaces will not change a reader's interpretation of feedback, but it's different enough for the computer
+			System.out.println("true");
 		else
-			System.out.println(""+false);
+			System.out.println("false");
 	
 	}
  }

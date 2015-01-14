@@ -69,7 +69,8 @@ SetupContest
   - check for forbidden words in all three languages (default on for any with files in the FORBIDDEN table of the database, off otherwise)
   - automatically include headers for all three langauges (default ?)
   - display team names to judge (default off)
- - a submit button which will always post data to the database
+  
+ - a submit button which will always POST data to the database
 -the submit button currently redirects to the SetupProblems page. It is the only button with a redirect. Do we actually want that?
 
 SetupProblems
@@ -128,6 +129,7 @@ SetupTeams
   - team email
  - a drop-down box to pick a site from the ones which have been created
  - a checkbox to indicate whether a team is a test team - one which is eligible to compete in the contest when it has been test-started before it is officially started
+ 
  - the submit button for this form shall POST to the server regardless of whether all the fields are filled in or not
   - the submit button shall check for valid entries for the username and password options before allowing the request to go through
 - the page shall have a table of teams with the following on each row:
