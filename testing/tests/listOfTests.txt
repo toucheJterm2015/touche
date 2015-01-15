@@ -84,17 +84,17 @@ SetupProblems
  x a title with the text "Add or Edit Problems"
  x short text entry fields for the problem name, shortened problem name, and problem location (as in where to put it on the server? Not actually sure what this is)
  x long text entry field for notes about the problem THIS CURRENTLY DOES NOT ALLOW APOSTROPHES WHICH MIGHT BE A PROBLEM
- - upload form for the html version of the problem
- - upload form for the pdf version of the problem
+ x upload form for the html version of the problem
+ x upload form for the pdf version of the problem
  x submit button which shall POST the new problem to the database
 - the page shall have a second form which contains the following:
  x title text "Edit Current Problems"
  x a table of existing problems with these on each row:
   x the problem name
-  - a link with the text "Edit"
-   - this shall GET the data for that problem from the database and fill it into the first form
-  - a link with text "Delete"
-   - this link shall DELETE the problem from the database
+  x a link with the text "Edit"
+   x this shall GET the data for that problem from the database and fill it into the first form
+  x a link with text "Delete"
+   x this link shall DELETE the problem from the database
 - if any of the database connections fail, the page shall contain an error message
 
 - Deleting a problem and then creating another one breaks the numbering of problems (and causes problems to not be auto-judged) - test thoroughly 
