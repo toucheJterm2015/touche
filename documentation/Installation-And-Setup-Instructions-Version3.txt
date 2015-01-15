@@ -1,0 +1,36 @@
+Packages Required
+-mutt and possibly sendmail for any email functionality 
+-PHP packages, PHP-CGI, suEXEC
+Server Setup 
+(Note for developers:steps 1 and 3 need to be done for all accounts that are on the server)
+1. crontab for user needs to be edited to contain: 
+“* * * * * /home/$username/master-crontab.cron > /dev/null 2>&1”
+(done with “crontab -e”)
+2. Setup phyMyAdmin
+a. Create a user named “contest-skeleton”. 
+b. Set “contest-skeleton” host to localhost. 
+c. Give “contest-skeleton” all global privileges.
+3. Run chmod 755 on entire user directory in order for suEXEC to work correctly.
+
+4. Add the .php extension to the CGI handler in the apache config
+
+5. Install suEXEC and configure it to change permissions on the contest folders.
+Setting up PHP to actually be runnable:
+1. Login as root
+2. Mount binfmt_misc: mount binfmt_misc -t binfmt_misc /proc/sys/fs/binfmt_misc 
+3. Next we need to create the php file, example command: 
+echo “:php:E::php::/usr/bin/php5-cgi:” > /proc/sys/fs/binfmt_misc/register
+Contest Setup Instructions (done for every contest)
+1. Login to ~username/index.php with 
+Username: “create” 
+Password: “contest”
+2. Host/Organization: Anything you want
+Contest: will use to name folders and DB
+DB Host: localhost
+DB Password: the password for contest_skeleton
+3. Login with 
+Username: admin
+Password: admin
+4. Change login, cannot use “admin” as password
+5. Fill in blanks
+Base directory: /home/username/$contestname
