@@ -28,7 +28,7 @@ class AddEditDeleteTeam(unittest.TestCase):
         driver.find_element_by_name("submit").click()
         #end of what should be the login function
         
-        driver.get(self.base_url + "/~mschmock/Contest/admin/setup_teams.php")
+        driver.get(self.base_url + "/admin/setup_teams.php")
         driver.find_element_by_link_text("Sites").click()
         
         #clears all the sites in the contest, to ensure that there are none and avoid logic errors

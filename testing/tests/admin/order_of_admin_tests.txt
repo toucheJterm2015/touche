@@ -8,3 +8,20 @@ We might eventually combine all the admin tests into one huge file to avoid logg
 6. details (presence & functionality)
 7. problems (p&f)
 8 - 15. go down the navbar in order.
+
+Those written:
+o 1
+o 2
+o 3
+o 4
+x 5
+xo 6
+xx 7
+oo 8
+xx 9
+xx 10
+oo 11
+xo 12
+xo 13
+oo 14
+oo 15

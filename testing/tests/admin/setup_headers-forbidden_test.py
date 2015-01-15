@@ -28,6 +28,7 @@ class SetupHeadersForbiddenTest(unittest.TestCase):
         driver.find_element_by_name("submit").click()
         #end of what should be the login function
         
+        #headers tests
         driver.get(self.base_url + "/admin/setup_headers.php")
         try: self.assertTrue(self.is_element_present(By.CSS_SELECTOR, "div.col-md-5"))
         except AssertionError as e: self.verificationErrors.append(str(e))
@@ -52,6 +53,18 @@ class SetupHeadersForbiddenTest(unittest.TestCase):
         try: self.assertFalse(self.is_element_present(By.NAME, "submit"))
         except AssertionError as e: self.verificationErrors.append(str(e))
         
+        #forbidden tests start here and continue until the end of the def
+        
+        #first, making every language have forbidden words
+        driver.get(self.base_url + "/admin/setup_contest.php")
+        if not driver.find_element_by_name("forbidden_c").is_selected():
+            driver.find_element_by_name("forbidden_c").click()
+        if not driver.find_element_by_name("forbidden_cpp").is_selected():
+            driver.find_element_by_name("forbidden_cpp").click()
+        if not driver.find_element_by_name("forbidden_java").is_selected():
+            driver.find_element_by_name("forbidden_java").click()
+        
+        #now all of the lists of forbidden words should be accessible.
         driver.get(self.base_url + "/admin/setup_forbidden.php")
         try: self.assertTrue(self.is_element_present(By.CSS_SELECTOR, "div.col-md-5"))
         except AssertionError as e: self.verificationErrors.append(str(e))
@@ -75,6 +88,19 @@ class SetupHeadersForbiddenTest(unittest.TestCase):
         driver.find_element_by_name("submit").click()
         try: self.assertFalse(self.is_element_present(By.NAME, "submit"))
         except AssertionError as e: self.verificationErrors.append(str(e))
+        
+        #turn off the java forbidden words (the most common to omit)
+        driver.get(self.base_url + "/admin/setup_contest.php")
+        if driver.find_element_by_name("forbidden_java").is_selected():
+            driver.find_element_by_name("forbidden_java").click()
+        
+        #now make sure that java is not listed as an option
+        driver.get(self.base_url + "/admin/setup_forbidden.php")
+        try: self.assertRegexpMatches(driver.find_element_by_css_selector("div.col-md-5").text, r"^[\s\S]*CXX[\s\S]*$")
+        except AssertionError as e: self.verificationErrors.append(str(e))#C++ should be represented there, but Java should not.
+        try: self.assertNotRegexpMatches(driver.find_element_by_css_selector("div.col-md-5").text, r"^[\s\S]*JAVA[\s\S]*$")
+        except AssertionError as e: self.verificationErrors.append(str(e))
+        
     
     def is_element_present(self, how, what):
         try: self.driver.find_element(by=how, value=what)

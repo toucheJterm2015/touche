@@ -190,7 +190,7 @@ SetupDataSets
     runs as expected.]]
  
 SetupSite
-- the page shall have a form with the title "Add a new site" and a single short entry text field for the site name
+x the page shall have a form with the title "Add a new site" and a single short entry text field for the site name
  - the submit button on this form shall POST to the database
 - the page shall also have a table with the title "Edit a Site"
  - the table shall include, on each row:
@@ -238,13 +238,12 @@ SetupTeams
  
 SetupCategories
 - the page shall have a form to add a new category (title, short text entry, submit button)
-- the page shall have a [[???]]
- - the submit button shall only work if there is text in the text entry field. If there is, the form shall POST to the database and create the new category
+ - the submit button shall only work if there is text in the title field. If there is, the form shall POST to the database and create the new category
     [[I forget which fields are required.  I would like it so that
     title is required and short text entry is optional.  If the short
     title is not entered, then the rest of the contest assumes the
     short entry is the same as the full title.]]
-- the page shall include a table of categorys with a title as well as the standard category name, edit (GET), and DELETE options
+- the page shall include a table of categories with a title as well as the standard category name, edit (GET), and DELETE options
  - when Edit is pressed, the form shall put the name of the category into the lone text field and change the title and button text to "Rename category"
 - the form shall have a second table/form, this one with:
  - column titles "Team Name" and then the names of categories such that all categories have a column
@@ -255,10 +254,10 @@ SetupCategories
     [[NOTE: A category is not required to have a team.]]
  
 SetupHeaders / SetupForbidden (these are so similar, I'm not writing the requirements twice. Change precise text as needed)
-- the page shall have a table with"
- - the title "Edit Current [Headers/Forbidden]"
- - each row shall have an accepted language name and an option to edit(GET), but no DELETE (if you want to add or remove accepted languages, you have to go back and add or remove from the source code)
-    [[Do not show a language's forbidden words entry if it was
+x the page shall have a table with"
+ x the title "Edit Current [Headers/Forbidden]"
+ x each row shall have an accepted language name and an option to edit(GET), but no DELETE (if you want to add or remove accepted languages, you have to go back and add or remove from the source code)
+  x [[Do not show a language's forbidden words entry if it was
     unchecked on the first set up page.  In other words, if we don't
     support forbidden words for Java, do not allow the user to enter
     any words for it and be under the mistaken impression that there
