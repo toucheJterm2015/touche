@@ -101,7 +101,11 @@ SetupContest
   x the full directory path the server uses to access contest files
       [[Not modifiable.  In fact, it should probably not be displayed to
     the admin since we don't want them to know how things work
-    internally?]] Why is it here then? 
+    internally?]] Why is it here then? [[Because it was developed
+    assuming the admin DID know the internals deeply and wouldn't be
+    bothered by this fact.  We're trying to move away from that
+    heritage so that the system could be installed and run by anyone
+    even if they don't know how the system works.]]
   x the judge account username and password (password field)
  x number entry fields, pre-filled with either the default values or whatever has been set in the database:
   x time (hour, minute, second) until standings are frozen
@@ -115,12 +119,15 @@ SetupContest
   
  x a submit button which will always POST data to the database
  [[The POST does not go to the database directly.  It goes to some
-    PHP that parses the information and updates the database.  I think
-    that page is self so that it can redisplay the results after doing
-    the POST.]]
+    PHP script that parses the information and updates the database.  I
+    think that page is self so that it can redisplay the results after
+    doing the POST.]]
 -the submit button currently redirects to the SetupProblems page. It is the only button with a redirect. Do we actually want that?
     [[Sort of.  The first time we click on the submit button we want
-    that, but any future update should stay at the page.]] Do we want all the submit buttons to redirect to the next page?
+    that, but any future update should stay at the page.]] Do we want
+    all the submit buttons to redirect to the next page?  [[No,
+    because many of the remaining pages expect multiple entries.  For
+    example, we add multiple problems, sites, teams, etc.]]
 
 SetupProblems
 - the page shall have a form which contains the following:
@@ -177,8 +184,10 @@ SetupDataSets
     [[I think the biggest item I know of right now is any suffix other
     than .in and .out.  Our system appends .in and .out to the
     uploaded files and then the automated judge breaks when it sees
-    something like test.txt.in instead of test.in .  Currently, I had
-    correct this to make sure the system runs as expected.]]
+    something like test.txt.in instead of test.in .  Currently, I hand
+    correct this by ensuring there is only one suffix in the filename
+    (e.g., test_txt.in instead of test.txt.in) to make sure the system
+    runs as expected.]]
  
 SetupSite
 - the page shall have a form with the title "Add a new site" and a single short entry text field for the site name
@@ -227,11 +236,14 @@ SetupTeams
  - some indication whether the team is a test team or not (I don't like the current implementation that the "Test Team?" column looks like a bunch of checkboxes but a user cannot click on them)
  - when the Edit link is clicked, the form shall auto-fill its fields from the database, including the checkbox indicating whether the team is a test team
  
-[[JGG comments currently stop here...more to follow]]
 SetupCategories
 - the page shall have a form to add a new category (title, short text entry, submit button)
-- the page shall have a 
+- the page shall have a [[???]]
  - the submit button shall only work if there is text in the text entry field. If there is, the form shall POST to the database and create the new category
+    [[I forget which fields are required.  I would like it so that
+    title is required and short text entry is optional.  If the short
+    title is not entered, then the rest of the contest assumes the
+    short entry is the same as the full title.]]
 - the page shall include a table of categorys with a title as well as the standard category name, edit (GET), and DELETE options
  - when Edit is pressed, the form shall put the name of the category into the lone text field and change the title and button text to "Rename category"
 - the form shall have a second table/form, this one with:
@@ -239,37 +251,73 @@ SetupCategories
  - the rows shall be the team names such that every team is included in the "Team Name" column
  - the rest of the fields in the table shall be editable checkboxes
  - when the submit button is pressed, the form shall POST and DELETE as necessary to the CATEGORY_TEAMS table in the database
+    [[NOTE: A team is not required to have a category.]]
+    [[NOTE: A category is not required to have a team.]]
  
 SetupHeaders / SetupForbidden (these are so similar, I'm not writing the requirements twice. Change precise text as needed)
 - the page shall have a table with"
  - the title "Edit Current [Headers/Forbidden]"
  - each row shall have an accepted language name and an option to edit(GET), but no DELETE (if you want to add or remove accepted languages, you have to go back and add or remove from the source code)
+    [[Do not show a language's forbidden words entry if it was
+    unchecked on the first set up page.  In other words, if we don't
+    support forbidden words for Java, do not allow the user to enter
+    any words for it and be under the mistaken impression that there
+    are forbidden words for a language when that feature has been
+    turned of.]]
  - Edit shall GET the document for the appropriate language from the database and put it into a form on the page
   - this form shall have a title indicating which language's document is being edited and the text of the document in a long text entry field
   - the submit button shall POST the edited document back to the database
+    [[These files do not represent documents, but lists of values
+    pulled from/inserted into the database.]]
 
 Misc
 - the page shall contain a form (table with many sub-forms?) with the following:
+    [[I forget if we implemented it with one form and multiple submit
+    buttons within one form or multiple forms each with a single
+    submit button.  Either implementation is acceptable.]]
  - hh:mm:ss time entry field to input an amount of time to extend the contest by + submit button
  - a button to "clear" the contest (probably needs a better name; it just reverts all sites to inactive and removes submissions. Problem , team, category, and other data will remain as it was
  - a short entry text field and button to clone a contest (when given a name, clones all contest data from one database to another in the same system, otherwise does nothing)
  - a short entry text field which takes an administrator's email and a button that promises to compress the problem files and send them to the entered email address
+    [[This should send more than the problem files.  It should send
+    everything generated by the contest.  That includes problem files,
+    submitted solutions, log files, output results for each
+    submission, etc.  It should not include things like the jails that
+    were automatically generated by the creation of the contest.
+    ALSO, this should send break up that information by teams and send
+    relevant information to each team's email address associated with
+    the team.  In other words, the team should get a historical
+    account of how it did on the contest without being able to see the
+    results of other teams.]]
   - this should definitely send an email unless something goes wrong, at which point it produces an error message for the user
+    [[Not web accessible.]]
  - an option (button) to regrade the autoresponses for the problems, which we will write functionality for soon, and idk yet how exactly we'll want it to work
+    [[We want it to work initially by regrading the results and
+    displaying an updated status with the new results.  Even better,
+    it should regrade the results and present to the judge a list of
+    submissions that need to be reviewed since they 1) differed from
+    the auto graded results to judged results in the original contest,
+    or 2) differed from the initial results to the regraded results.
+    The judge can then review any results in the list and then see the
+    updated standings once those are all complete.]]
 
 Start
 - the page shall contain a table with a title "Start Contest" and the following:
  - in each row, the name of a site, started or not
+    [[The rows must be disabled if the contest has not be started or
+    test-started.  Once it has been, then the appropriate checkboxes
+    will be enabled to allow the user to affect the particular sites
+    in question.]]
   - if the site has not yet been officially started, a checkbox on the same row
   - if the site has been test-started, text indicating that status as well as the checkbox
- - two submit buttons (one for start, one for test-start) which will start/teststart the contest for all sites with checked boxes.
+ - two submit buttons (one for start, one for test-start) which will start/test-start the contest for all sites with checked boxes.
 
 
 JUDGE---------------------------------------------------------------------
 NOT PAGE SPECIFIC
 judge/clarification_response_form.php has not been bootstrap-ed - test for this
 Login functionality
-2 Timers
+2 Timers [[What does this mean?]]
 Queued submissions counter displays 
 	-Submissions are cleared from the queue appropriately
 Unanswered clarifications counter 
@@ -281,7 +329,20 @@ Displaying submissions (applies to multiple, but not all pages)
 			-All submission description info is correct
 			-"Final result" drop down default value is equal to auto response
 			-Information from comparing .out file to submission is correct
+			    [[You need to remember that sometimes
+			    there will be multiple outputs to compare
+			    and they will have different competing
+			    results.  There need to be scenarios for
+			    several different outputs so this isn't
+			    lost.  For example, all but one correct;
+			    many different error types, some format
+			    errors and some incorrect errors; both run
+			    time error and run length error; etc.]]
 	-Filtering
+		[[Make it very clear that filtering is taking place.
+		The system currently being used is weak in this area.
+		The updated look-and-feel should improve in this
+		area.]]
 		-Unfiltered results all display  
 		-Filter by problem
 			-Links exist for all problems
@@ -303,6 +364,11 @@ Only un-judged submissions are shown
 
 REVIEW JUDGEMENTS
 Only submissions judged by the current user are shown (is there only one judge account?)
+    [[Only submission judged are shown since there is only one judge
+    account and we don't keep track of who judged which problem.
+    Typically, in small contests there is only one judge; in big
+    contests judged are dedicated to specific problems, so everyone
+    knows who gave the initial judgement.]]
 
 PROBLEMS
 All problems are displayed
@@ -322,6 +388,8 @@ Make new clarification/respond to clarification
 	-Question is correctly displayed (or not displayed)
 	
 STANDINGS
+[[see comments about standings from contestant pages--same applies
+here.]]
 All problems displayed
 Time taken for each problem displayed correctly (not displayed for incomplete questions)
 Problems completed displayed correctly
@@ -337,6 +405,7 @@ Both times display correctly
 
 ALTERNATE SUBSTITUTION PAGE
 Page shows only when it should
+    [[which is...]]
 Result is stored correctly
 
 PROBLEMS PAGE
@@ -348,12 +417,21 @@ Documents are not viewable for inactive contests
 SUBMISSIONS
 File upload 
 	-works (no corruptions, etc.)
+	    [[Not web accessible.]]
 	-File stays paired with correct problem
+	    [[Not web accessible.]]
 Submissions are displayed correctly
 	-Correct coloring
 	-Correct information (especially the result from judge)
 
 STANDINGS
+[[This is extremely important.  You need to give multiple scenarios to
+show all the possible standings that could occur.  Saying "correct
+standings" is too generic and vague to be ensure you've tested all the
+essential components of the standings.  Some examples that could
+easily be forgotten include: ties between teams; problem submitted,
+but not yet graded; and no correct submissions for a problem.  There
+are many more scenarios that need to be explored.]]
 Team name stays connected to correct standings
 All problems are displayed
 Minutes displayed for each problem correct
