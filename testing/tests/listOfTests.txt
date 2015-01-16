@@ -301,15 +301,12 @@ Misc
     updated standings once those are all complete.]]
 
 Start
-- the page shall contain a table with a title "Start Contest" and the following:
- - in each row, the name of a site, started or not
-    [[The rows must be disabled if the contest has not be started or
-    test-started.  Once it has been, then the appropriate checkboxes
-    will be enabled to allow the user to affect the particular sites
-    in question.]]
-  - if the site has not yet been officially started, a checkbox on the same row
-  - if the site has been test-started, text indicating that status as well as the checkbox
- - two submit buttons (one for start, one for test-start) which will start/test-start the contest for all sites with checked boxes.
+x the page shall contain a table with a title "Start Contest" and the following:
+ x in each row, the name of a site, started or not
+  x if the site has not yet been officially started, a checkbox on the same row
+  x if the site has been started, text will replace the checkbox saying so
+  x if the site has been test-started, text indicating that status as well as the checkbox
+ x two submit buttons (one for start, one for test-start) which will start/test-start the contest for all sites with checked boxes.
 
 
 JUDGE---------------------------------------------------------------------

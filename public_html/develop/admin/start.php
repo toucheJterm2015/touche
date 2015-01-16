@@ -193,6 +193,9 @@ while($row = mysql_fetch_assoc($result))
 			}
 			echo "<input type=checkbox name=chksite[] value='" . $row['SITE_ID'] . "' > <font color='red'>$test_running</td></tr>";
 		}
+		else{
+			echo "<font color='red'>Contest Started</td></tr>"//gets rid of the checkbox.
+		}
 	}
 }
 
