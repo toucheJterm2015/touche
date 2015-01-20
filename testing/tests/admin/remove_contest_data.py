@@ -10,7 +10,7 @@ from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import NoAlertPresentException
 import unittest, time, re
 
-class AdminHeaderTestAllPages(unittest.TestCase):
+class RemoveContestData(unittest.TestCase):
     def setUp(self):
         self.driver = webdriver.PhantomJS("/usr/local/bin/phantomjs")
         self.driver.implicitly_wait(30)
@@ -18,7 +18,7 @@ class AdminHeaderTestAllPages(unittest.TestCase):
         self.verificationErrors = []
         self.accept_next_alert = True
     
-    def test_admin_header_test_all_pages(self):
+    def test_remove_contest_data(self):
         driver = self.driver
         
         #should be moved to separate function, but for now when I try to do so, it breaks.
@@ -46,7 +46,7 @@ class AdminHeaderTestAllPages(unittest.TestCase):
         try: del_button = driver.find_element_by_link_text("Delete")
         except NoSuchElementException as e: del_button=None
         while del_button!=None:
-            print "loop 1"
+            #print "loop 1"
             del_button.click()
             try: del_button = driver.find_element_by_link_text("Delete")
             except NoSuchElementException as e: del_button=None
@@ -58,7 +58,7 @@ class AdminHeaderTestAllPages(unittest.TestCase):
         try: del_button = driver.find_element_by_link_text("Delete")
         except NoSuchElementException as e: del_button=None
         while del_button!=None:
-            print "loop 2"
+            #print "loop 2"
             del_button.click()
             try: del_button = driver.find_element_by_link_text("Delete")
             except NoSuchElementException as e: del_button=None
@@ -70,7 +70,7 @@ class AdminHeaderTestAllPages(unittest.TestCase):
         try: del_button = driver.find_element_by_link_text("Delete")
         except NoSuchElementException as e: del_button=None
         while del_button!=None:
-            print "loop 3"
+            #print "loop 3"
             del_button.click()
             try: del_button = driver.find_element_by_link_text("Delete")
             except NoSuchElementException as e: del_button=None
@@ -82,7 +82,7 @@ class AdminHeaderTestAllPages(unittest.TestCase):
         try: del_button = driver.find_element_by_link_text("Delete")
         except NoSuchElementException as e: del_button=None
         while del_button!=None:
-            print "loop 4"
+            #print "loop 4"
             del_button.click()
             try: del_button = driver.find_element_by_link_text("Delete")
             except NoSuchElementException as e: del_button=None
