@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://touche.cse.taylor.edu/" />
+<title>clarifications</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">clarifications</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/~mgoldsbe/ourContest/index.php</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=user</td>
+	<td>team1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=password</td>
+	<td>password</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Clarifications</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>link=problem1</td>
+	<td>problem1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>link=problem2</td>
+	<td>problem2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=button.btn.btn-default</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=problem_id</td>
+	<td>label=problem1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=question</td>
+	<td>Do clarifications work?</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/~mgoldsbe/ourContest/judge/index.php</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=user</td>
+	<td>judge</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=password</td>
+	<td>password</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Clarifications</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Respond to Clarification</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=response</td>
+	<td>Ummmm yeah! They sure do.</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/~mgoldsbe/ourContest/index.php</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=user</td>
+	<td>team1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=password</td>
+	<td>password</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Clarifications</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=problem1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[5]/td[2]</td>
+	<td>*clarification*</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=button.btn.btn-default</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=question</td>
+	<td>Special characters?&nbsp;&nbsp;~`!@#$%^&amp;*()_+09&gt;&lt;?/;:'&quot;\|,.&lt;&gt; {}[] &quot;asdf&quot; 'asdf'</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/~mgoldsbe/ourContest/judge/index.php</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=user</td>
+	<td>judge</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=password</td>
+	<td>password</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Clarifications</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Respond to Clarification</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=response</td>
+	<td>Special character response - <br />~`<br />!1<br />@2<br />#3<br />$4<br />%5<br />^6<br />&amp;7<br />888*?/&gt;&lt;,.</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=broadcast</td>
+	<td>label=Respond to All</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/~mgoldsbe/ourContest/index.php</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=user</td>
+	<td>team1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=password</td>
+	<td>password</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Clarifications</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[6]/td[2]</td>
+	<td>*response*</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/~mgoldsbe/ourContest/index.php</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=user</td>
+	<td>team2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=password</td>
+	<td>password</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Clarifications</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[6]/td[2]</td>
+	<td>*response*</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=problem1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyNotText</td>
+	<td>//tr[5]/td[2]</td>
+	<td>*</td>
+</tr>
+
+</tbody></table>
+</body>
+</html>

@@ -1,0 +1,466 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://touche.cse.taylor.edu/" />
+<title>test</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">test</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/~mgoldsbe/ourContest/index.php</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=user</td>
+	<td>team1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=password</td>
+	<td>password</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=h3</td>
+	<td>*team1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Submissions</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=b</td>
+	<td>*problem1</td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td>null</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//table[3]/tbody/tr/td/b</td>
+	<td>*problem2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=source_file</td>
+	<td>C:\Users\Matt\Desktop\aa.java</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input[type=&quot;submit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//td[3]/font</td>
+	<td>Queued for judging</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=problem_id</td>
+	<td>label=2 - problem2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=source_file</td>
+	<td>C:\Users\Matt\Desktop\aa.java</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input[type=&quot;submit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[3]/tbody/tr[3]/td[3]/font</td>
+	<td>Queued for judging</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/~mgoldsbe/ourContest/index.php</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=user</td>
+	<td>team2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=password</td>
+	<td>password</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=h3</td>
+	<td>*team2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Submissions</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=b</td>
+	<td>*problem1</td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td>null</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//table[3]/tbody/tr/td/b</td>
+	<td>*problem2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=source_file</td>
+	<td>C:\Users\Matt\Desktop\aa.java</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input[type=&quot;submit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//td[3]/font</td>
+	<td>Queued for judging</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=problem_id</td>
+	<td>label=2 - problem2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=source_file</td>
+	<td>C:\Users\Matt\Desktop\aa.java</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input[type=&quot;submit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[3]/tbody/tr[3]/td[3]/font</td>
+	<td>Queued for judging</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/~mgoldsbe/ourContest/judge/index.php</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=user</td>
+	<td>judge</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=password</td>
+	<td>password</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>60000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>refreshAndWait</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=judge submission</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=result</td>
+	<td>label=Format Error</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=judge submission</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=result</td>
+	<td>label=Runtime Error</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td>null</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=judge submission</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=result</td>
+	<td>label=Forbidden Word in Source</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=judge submission</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=result</td>
+	<td>label=Incorrect Output</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/~mgoldsbe/ourContest/index.php</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=user</td>
+	<td>team1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=password</td>
+	<td>password</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Submissions</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=source_file</td>
+	<td>C:\Users\Matt\Desktop\aa.java</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input[type=&quot;submit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=problem_id</td>
+	<td>label=2 - problem2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=source_file</td>
+	<td>C:\Users\Matt\Desktop\aa.java</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input[type=&quot;submit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>~mgoldsbe/ourContest/judge/index.php</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=user</td>
+	<td>judge</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=password</td>
+	<td>password</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>60000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>refreshAndWait</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=judge submission</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=result</td>
+	<td>label=Accepted</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=judge submission</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=result</td>
+	<td>label=Accepted</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>~mgoldsbe/ourContest/index.php</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=user</td>
+	<td>team1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=password</td>
+	<td>password</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Submissions</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Standings</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//td[3]/font</td>
+	<td>*/2</td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>//td[3]/font</td>
+	<td>sliceMeProb1</td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>String(storedVars['sliceMeProb1']).slice(3,5)</td>
+	<td>minutes</td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>//td[4]/font</td>
+	<td>sliceMeProb2</td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>parseInt(String(storedVars['sliceMeProb2']).slice(3,5)) + ${minutes}</td>
+	<td>minutes</td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>${minutes}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>//tr[3]/td[5]</td>
+	<td>sliceMeTotalScore</td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>String(storedVars['sliceMeTotalScore']).slice(5,7)</td>
+	<td>displayedScore</td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>parseInt(storedVars['minutes']) + 40</td>
+	<td>calculatedScore</td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>${calculatedScore}</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyEval</td>
+	<td>storedVars['displayedScore'] == storedVars['calculatedScore']</td>
+	<td>true</td>
+</tr>
+</tbody></table>
+</body>
+</html>
