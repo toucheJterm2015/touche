@@ -11,7 +11,7 @@ class AddEditDeleteProblems(unittest.TestCase):
     def setUp(self):
         self.driver = webdriver.PhantomJS("/usr/local/bin/phantomjs")
         self.driver.implicitly_wait(30)
-        self.base_url = "http://localhost"
+        self.base_url = "http://localhost/~touche/Test_Contest"
         self.verificationErrors = []
         self.accept_next_alert = True
     
@@ -19,7 +19,7 @@ class AddEditDeleteProblems(unittest.TestCase):
         driver = self.driver
         
         #should be moved to separate function, but for now when I try to do so, it breaks.
-        driver.get(self.base_url + "/~mschmock/Contest/admin/index.php")
+        driver.get(self.base_url + "/admin/index.php")
         user = driver.find_element_by_name("user")
         user.clear()
         user.send_keys("admin")
@@ -28,7 +28,7 @@ class AddEditDeleteProblems(unittest.TestCase):
         driver.find_element_by_name("submit").click()
         #end of what should be the login function
         
-        driver.get(self.base_url + "/~mschmock/Contest/admin/setup_problems.php")
+        driver.get(self.base_url + "/admin/setup_problems.php")
         driver.find_element_by_name("problem_name").clear()
         driver.find_element_by_name("problem_name").send_keys("NewProblem")
         driver.find_element_by_name("problem_short_name").clear()

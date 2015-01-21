@@ -11,7 +11,7 @@ class DataSetsAndProblemsTest(unittest.TestCase):
     def setUp(self):
         self.driver = webdriver.PhantomJS("/usr/local/bin/phantomjs")
         self.driver.implicitly_wait(15)
-        self.base_url = "http://localhost/~mschmock/Contest"
+        self.base_url = "http://localhost/~touche/Test_Contest"
         self.verificationErrors = []
         self.accept_next_alert = True
     

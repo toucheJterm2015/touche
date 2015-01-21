@@ -27,10 +27,10 @@ CREATE CONTEST (1)
     gets passed to shell commands as part of the creation.  As a
     result, you'll really have to limit the set of legal characters to
     avoid both types of injection.]]
-- initial page shall support login to system
+x initial page shall support login to system
 - shall have header text "ADMIN" once logged in (is this really necessary? In current implementation, it's hidden in the header bar)
 - shall have text "Initial Contest Setup"
-- page shall have short text input fields for the contest name, contest host name, database host name, and a password to use with the database host
+x page shall have short text input fields for the contest name, contest host name, database host name, and a password to use with the database host
  -* the page shall test for valid input in all four fields before allowing the form to submit
 - page shall have submit button
  -* submit button shall work iff all fields are filled in (OR trying to submit w/o all fields filled in shall pop up with an error rather than going to the next page)
@@ -62,23 +62,23 @@ CREATE CONTEST (2)
   - with the partial information from the CREATE CONTEST (1) page
     [[Not web accessible.]]
 - the script shall change placeholder text in the readme to a current URL that links to the current contest
-- if any of these functions fail, the page shall print an error message
-- the page shall include a link to the administration login page (if the contest is created successfully)
+x if any of these functions fail, the page shall print an error message
+x the page shall include a link to the administration login page (if the contest is created successfully)
 
 ADMIN PAGES----------------------------------------------------------------
 
 Index
-- page shall support login to system
+x page shall support login to system
  - for new administrators, the username and password are both "admin" (if changed, reflect change in the readmes and/or instruction documents)
 [[-on first login the password is required to be changed]] I meant if the default, first-login password was changed, sorry for not being clear
- - for returning administrators, the username and password shall be whatever they have set
+ x for returning administrators, the username and password shall be whatever they have set
 
 ChangePW
-- the page shall contain the text "Login Information" in a statement suggesting change. (The current "Please change your Login Information" is sufficient, as is the fragment/title "New Login Information")
-- the page shall contain a form with one short text input field and two password input fields and a submit button
+x the page shall contain the text "Login Information" in a statement suggesting change. (The current "Please change your Login Information" is sufficient, as is the fragment/title "New Login Information")
+x the page shall contain a form with one short text input field and two password input fields and a submit button
  - the fields shall check whether their input is valid (the two password fields must have the same content)
  - the submit button shall have the text "Change"
- - the submit button shall refresh the page if the form does not have valid input
+ x the submit button shall refresh the page if the form does not have valid input
  - the submit button shall POST to (this same php document)? if the input is valid, then redirect to the SetupContest page
   - this action shall update the database of user/password combinations
     [[Not web accessible.]]
@@ -138,11 +138,11 @@ SetupProblems
     purposes.  Spaces are especially deadly here.]]
  x long text entry field for notes about the problem THIS CURRENTLY DOES NOT ALLOW APOSTROPHES WHICH MIGHT BE A PROBLEM
  x upload form for the html version of the problem
- [[Check that these are not visible until the contest is started!
+  -[[Check that these are not visible until the contest is started!
     We've had people try to check by looking at problems before
     contests were started and saved by this feature being present.]]
  x upload form for the pdf version of the problem
- [[Check that these are not visible until the contest is started!
+  -[[Check that these are not visible until the contest is started!
     We've had people try to check by looking at problems before
     contests were started and saved by this feature being present.]]
  x submit button which shall POST the new problem to the database
