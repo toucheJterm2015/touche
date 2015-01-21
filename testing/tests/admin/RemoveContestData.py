@@ -1,6 +1,4 @@
-#! usr/bin/python
-
-# this is just the presence-of (buttons, text fields...) tests, not the functionality tests
+# this is not really a test, but it kills any unexpected data potentially left over from previous tests, and it runs the same way the actual tests do.
 # -*- coding: utf-8 -*-
 from selenium import webdriver
 from selenium.webdriver.common.by import By

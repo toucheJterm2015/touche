@@ -8,6 +8,9 @@ from selenium.common.exceptions import NoAlertPresentException
 import unittest, time, re
 
 class AddEditDeleteProblems(unittest.TestCase):
+    def __init__(self):
+        self.setUp()
+    
     def setUp(self):
         self.driver = webdriver.PhantomJS("/usr/local/bin/phantomjs")
         self.driver.implicitly_wait(30)
