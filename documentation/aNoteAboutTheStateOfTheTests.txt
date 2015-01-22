@@ -1,0 +1,19 @@
+Things are broken.  We were unable to leave it in a workable state (sorry).
+Ideally all of the tests would be in python, but some of them are still html.
+(Html files can be opened by the selenium firefox web add on and exported
+to python from there.)  We realized too late that file uploads do not work
+with the current architecture.  The tests need a browser to work (selenium
+just manipulates a browser - it does not actually do web requests and such.)
+A headless browser called phantomjs is installed on the server for this 
+purpose.  For some reason this browser does not allow file uploads via
+the python "sendKeys" function.  It seems as though this is the only python
+way to upload files.  Therefore most of the tests do not work after being 
+exported.  We figured this out later than we should have so some tests that 
+require file uploads have been exported and some have not.  The ones that
+have not been exported to python are much easier for you to edit (via the
+selenium ide (firefox add on)).  
+
+There is a listOfTests.txt (in testing/tests) that details what we thought all of the functionality 
+should be.
+An x at the beginning of the a line in that document indicates that we think there is 
+a test for that.

@@ -1,0 +1,569 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://touche.cse.taylor.edu/" />
+<title>test</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">test</td></tr>
+</thead><tbody>
+<!--Each page is tested, and is marked below. This test assumes a contest -->
+<!--has been started with two teams ("team1" and "team2", both passwords =-->
+<!--"password") and two problems ("problem1" and "problem2") to submit-->
+<!--answers to. Known issues are tagged with "!!!".-->
+<!--Don't forget - you'll have to change the file locations throughout this test for other contests/testers-->
+<!---->
+<!--Begin test.-->
+<!--!!! How do we test the time display?-->
+<!--Open team sign-in page: username = "team1", password = "password"-->
+<tr>
+	<td>open</td>
+	<td>/~naeilts/MazeRunner/index.php</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=user</td>
+	<td>team1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=password</td>
+	<td>password</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=h3</td>
+	<td>*team1</td>
+</tr>
+<!--Verifying Alternate Teammate page (team1)-->
+<!--    This will only happen upon a team's first sign-in. Why is this comment yellow?-->
+<!--        (!!! Empty! Do something about this!)-->
+<!---->
+<!--Verifying Problems Page Data (team1)-->
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Problems</td>
+	<td></td>
+</tr>
+<!--    Checking that problem numbers and names display correctly-->
+<tr>
+	<td>verifyText</td>
+	<td>//tr[3]/td</td>
+	<td>1 - problem1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[4]/td</td>
+	<td>2 - problem2</td>
+</tr>
+<!--    Checking that HTML and pdf display properly-->
+<!--        (!!! Something is wrong with adding pdf's in admin.)-->
+<!--        (!!! Not entirely sure how to check that these display faithfully.)-->
+<!---->
+<!--    Checking that documents are not viewable for inactive contests-->
+<!--        (!!! There are no inactive contests to check against at this time. Need to add that to test setup.)-->
+<!---->
+<!--Verifying Submissions Page Data and Function Tests (team1)-->
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Submissions</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=b</td>
+	<td>Problem #1: problem1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//table[3]/tbody/tr/td/b</td>
+	<td>Problem #2: problem2</td>
+</tr>
+<!--    (Not terribly certain why the selectWindow command is necessary, nor how the type command works with the "Browse..." button-->
+<tr>
+	<td>selectWindow</td>
+	<td>null</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=source_file</td>
+	<td>X:\08_2015_Jterm\Project\ContestProblems\Submissions\Answer1.cpp</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input[type=&quot;submit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//td[3]/font</td>
+	<td>Queued for judging</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=problem_id</td>
+	<td>label=2 - problem2</td>
+</tr>
+<!--    ...because the selectWindow command isn't necessary here for some reason. And how do you "type" into a button?-->
+<tr>
+	<td>type</td>
+	<td>name=source_file</td>
+	<td>X:\08_2015_Jterm\Project\ContestProblems\Submissions\Answer2.cpp</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input[type=&quot;submit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[3]/tbody/tr[3]/td[3]/font</td>
+	<td>Queued for judging</td>
+</tr>
+<!---->
+<!--Runing through the same set of instructions for team2-->
+<tr>
+	<td>open</td>
+	<td>/~naeilts/MazeRunner/index.php</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=user</td>
+	<td>team2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=password</td>
+	<td>password</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=h3</td>
+	<td>*team2</td>
+</tr>
+<!--Verifying Alternate Teammate page (team2)-->
+<!--    This will only happen upon a team's first sign-in. Why is this comment yellow?-->
+<!--        (!!! Empty! Do something about this!)-->
+<!---->
+<!--Verifying Problems Page Data (team2)-->
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Problems</td>
+	<td></td>
+</tr>
+<!--    Checking that problem numbers and names display correctly-->
+<tr>
+	<td>verifyText</td>
+	<td>//tr[3]/td</td>
+	<td>1 - problem1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//tr[4]/td</td>
+	<td>2 - problem2</td>
+</tr>
+<!--    Checking that HTML and pdf display properly-->
+<!--        (!!! Something is wrong with adding pdf's in admin.)-->
+<!--        (!!! Not entirely sure how to check that these display faithfully.)-->
+<!---->
+<!--    Checking that documents are not viewable for inactive contests-->
+<!--        (!!! There are no inactive contests to check against at this time. Need to add that to test setup.)-->
+<!---->
+<!--Verifying Submissions Page Data and Function Tests (team2)-->
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Submissions</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>css=b</td>
+	<td>Problem #1: problem1</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//table[3]/tbody/tr/td/b</td>
+	<td>Problem #2: problem2</td>
+</tr>
+<!--    (Not terribly certain why the selectWindow command is necessary, nor how the type command works with the "Browse..." button-->
+<tr>
+	<td>selectWindow</td>
+	<td>null</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=source_file</td>
+	<td>X:\08_2015_Jterm\Project\ContestProblems\Submissions\Answer1.cpp</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input[type=&quot;submit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//td[3]/font</td>
+	<td>Queued for judging</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=problem_id</td>
+	<td>label=2 - problem2</td>
+</tr>
+<!--    ...because the selectWindow command isn't necessary here for some reason. And how do you "type" into a button?-->
+<tr>
+	<td>type</td>
+	<td>name=source_file</td>
+	<td>X:\08_2015_Jterm\Project\ContestProblems\Submissions\Answer2.cpp</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input[type=&quot;submit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table[3]/tbody/tr[3]/td[3]/font</td>
+	<td>Queued for judging</td>
+</tr>
+<!---->
+<!---->
+<!--Moving to judge's page to generate feedback to display for the teams-->
+<!--    !!! Need to add tests to check submissions for corruptions-->
+<!--    !!! Need to add tests to check submissions remain paired with corresponding problems-->
+<tr>
+	<td>open</td>
+	<td>/~naeilts/MazeRunner/judge/index.php</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=user</td>
+	<td>judge</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=password</td>
+	<td>password</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=submit</td>
+	<td></td>
+</tr>
+<!--    I think there's a better way to wait so that it will move on as soon as it "sees" the page is done loading. Figure it out later...-->
+<tr>
+	<td>pause</td>
+	<td>60000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>refreshAndWait</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=judge submission</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=result</td>
+	<td>label=Format Error</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=judge submission</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=result</td>
+	<td>label=Runtime Error</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=submit</td>
+	<td></td>
+</tr>
+<!--    (Seriously, why do these "selectWindow" commands keep showing up?)-->
+<tr>
+	<td>selectWindow</td>
+	<td>null</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=judge submission</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=result</td>
+	<td>label=Forbidden Word in Source</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=judge submission</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=result</td>
+	<td>label=Incorrect Output</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=submit</td>
+	<td></td>
+</tr>
+<!---->
+<!---->
+<!---->
+<!--Moving back to team1 page to resubmit "corrected" submissions-->
+<tr>
+	<td>open</td>
+	<td>/~naeilts/MazeRunner/index.php</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=user</td>
+	<td>team1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=password</td>
+	<td>password</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Submissions</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=source_file</td>
+	<td>X:\08_2015_Jterm\Project\ContestProblems\Submissions\Answer1.cpp</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input[type=&quot;submit&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=problem_id</td>
+	<td>label=2 - problem2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=source_file</td>
+	<td>X:\08_2015_Jterm\Project\ContestProblems\Submissions\Answer2.cpp</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input[type=&quot;submit&quot;]</td>
+	<td></td>
+</tr>
+<!---->
+<!---->
+<!--Back to judge... to accept team1's resubmissions-->
+<tr>
+	<td>open</td>
+	<td>/~naeilts/MazeRunner/judge/index.php</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=user</td>
+	<td>judge</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=password</td>
+	<td>password</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>60000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>refreshAndWait</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=judge submission</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=result</td>
+	<td>label=Accepted</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=judge submission</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=result</td>
+	<td>label=Accepted</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=submit</td>
+	<td></td>
+</tr>
+<!---->
+<!---->
+<!--Back to team1... Checking the scoring displays-->
+<tr>
+	<td>open</td>
+	<td>/~naeilts/MazeRunner/index.php</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=user</td>
+	<td>team1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=password</td>
+	<td>password</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Standings</td>
+	<td></td>
+</tr>
+<!--    Checks that the number of submission attempts is accurate for each problem-->
+<!--    !!! There should probably be a test to make sure the hours adding up, too (there isn't right now)-->
+<tr>
+	<td>verifyText</td>
+	<td>//td[3]/font</td>
+	<td>*/2</td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>//td[3]/font</td>
+	<td>sliceMeProb1</td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>String(storedVars['sliceMeProb1']).slice(3,5)</td>
+	<td>prob1minutes</td>
+</tr>
+<tr>
+	<td>verifyEval</td>
+	<td>storedVars['prob1minutes'] =='01'</td>
+	<td>true</td>
+</tr>
+<tr>
+	<td>verifyText</td>
+	<td>//td[4]/font</td>
+	<td>*/2</td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>//td[4]/font</td>
+	<td>sliceMeProb2</td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>String(storedVars['sliceMeProb2']).slice(3,5)</td>
+	<td>prob2minutes</td>
+</tr>
+<tr>
+	<td>verifyEval</td>
+	<td>storedVars['prob2minutes'] =='01'</td>
+	<td>true</td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>parseInt(storedVars['prob1minutes']) + parseInt(storedVars['prob2minutes'])</td>
+	<td>combinedMinutes</td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>//tr[3]/td[5]</td>
+	<td>sliceMeTotalScore</td>
+</tr>
+<tr>
+	<td>storeEval</td>
+	<td>String(storedVars['sliceMeTotalScore']).slice(5,7)</td>
+	<td>displayedScore</td>
+</tr>
+<!--    We're adding 40 because we know there were 2 incorrect submission, costing 20 minutes each-->
+<tr>
+	<td>storeEval</td>
+	<td>${combinedMinutes} + 40</td>
+	<td>calculatedScore</td>
+</tr>
+<tr>
+	<td>verifyEval</td>
+	<td>storedVars['displayedScore'] == storedVars['calculatedScore']</td>
+	<td>true</td>
+</tr>
+<!--    !!! Should check for team2 submissions, too-->
+<!---->
+<!---->
+<!--!!! Add clarifications page tests-->
+<!--!!! Add readme page tests-->
+</tbody></table>
+</body>
+</html>

@@ -1,0 +1,1 @@
+We should make the .in and .out and .html and .pdf files that our tests will use and put them in this folder. Currently, they do not exist.

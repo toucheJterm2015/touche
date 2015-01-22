@@ -1,0 +1,44 @@
+We might eventually combine all the admin tests into one huge file to avoid logging in every single time, and so a final destructor can take everything away again. In case we don't get that far, here is the intended order for running tests
+
+1. create contest
+2. create contest 2
+3. login (1)
+4. change password
+5. login (2)
+6. details (presence & functionality. Sometimes these are combined, sometimes separate.)
+7. problems (p&f)
+8 - 15. go down the navbar in order.
+
+Those written:
+x 1
+x 2
+x 3
+x 4
+x 5
+xo 6
+xx 7
+xx 8
+xx 9
+xx 10
+xx 11
+xo 12
+xo 13
+xo 14
+xx 15
+
+included in master:
+x 1
+x 2
+x 3
+x 4
+x 5
+xo 6
+xx 7
+xx 8
+xx 9
+xx 10
+oo 11
+oo 12
+oo 13
+oo 14
+oo 15
