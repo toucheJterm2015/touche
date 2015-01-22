@@ -63,6 +63,7 @@ class SetupHeadersForbiddenTest(unittest.TestCase):
             driver.find_element_by_name("forbidden_cpp").click()
         if not driver.find_element_by_name("forbidden_java").is_selected():
             driver.find_element_by_name("forbidden_java").click()
+        driver.find_element_by_name("submit").click()
         
         #now all of the lists of forbidden words should be accessible.
         driver.get(self.base_url + "/admin/setup_forbidden.php")
@@ -93,11 +94,12 @@ class SetupHeadersForbiddenTest(unittest.TestCase):
         driver.get(self.base_url + "/admin/setup_contest.php")
         if driver.find_element_by_name("forbidden_java").is_selected():
             driver.find_element_by_name("forbidden_java").click()
+            driver.find_element_by_name("submit").click()
         
         #now make sure that java is not listed as an option
         driver.get(self.base_url + "/admin/setup_forbidden.php")
         try: self.assertRegexpMatches(driver.find_element_by_css_selector("div.col-md-5").text, r"^[\s\S]*CXX[\s\S]*$")
-        except AssertionError as e: self.verificationErrors.append(str(e))#C++ should be represented there, but Java should not.
+        except AssertionError as e: self.verificationErrors.append(str(e))#C++ should still be represented there, but Java should not.
         try: self.assertNotRegexpMatches(driver.find_element_by_css_selector("div.col-md-5").text, r"^[\s\S]*JAVA[\s\S]*$")
         except AssertionError as e: self.verificationErrors.append(str(e))
         
