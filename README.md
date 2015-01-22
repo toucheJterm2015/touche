@@ -1,6 +1,3 @@
-OLD README //Not sure if this still applies to touche
-
-
 For directions on installing Touche, see that installation docs in the
 /documentation/ folder of this repository.
 
@@ -21,6 +18,8 @@ is in a directory named src):
     ln -s ~/src/public_html/dbcreate.sql public_html/dbcreate.sql
     ln -s ~/src/public_html/readme public_html/readme
     ln -s ~/src/public_html/lib public_html/lib
+    ln -s ~/src/master-crontab.cron master-crontab.cron
+    ln -s ~/src/jails jails
 
 We cannot use symbolic links for the `createcontest` scripts since
 they are directly executed by the web server and we use suexec, which
