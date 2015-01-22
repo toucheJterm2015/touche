@@ -1,0 +1,39 @@
+BUGS
+There are more bugs in geislers github under "issues".  Some of them
+overlap with these, but none are complete duplicates. (and some of these
+only apply to the j-term branch and not his master)
+
+Team filter not set correctly if not a POST - judge/submissions.inc 
+line 52
+
+judge/clarification_response_form.php has not been bootstrap-ed
+
+While editing a problem, pressing the "edit" button for another problem 
+breaks things (and other pages too - sites, teams, etc.) - meaning that
+if you have the edit page for a problem open do NOT hit the edit button
+for a different problem.
+
+Once a problem description file has been uploaded, it sometimes cannot be changed
+
+Problem files cannot be uploaded from the problem creation screen (only 
+from the problem edit screen) (not sure whether to call this a bug or not)
+
+Editing a problem removes the problem description file sometimes
+
+Entering just a PDF file for a problem description (and not an html)
+gives an error at contest start, and it will not open the pdf from the 
+player view
+
+You can create 2 teams with the same username (and that's bad - it breaks
+the login functionality for those two teams in weird ways)
+
+SQL injection opportunities are everywhere - when creating a contest you cannot have 
+many special characters in the name (semi-colon for example).  This is a problem in many places
+such as contest name, and many other places in the admin pages.
+
+Root password and contest skeleton password have to be the same - the same variable 
+is used for the password for these two different roles while creating a contest.  Therefore 
+if the passwords are different then it breaks (meaning don't change the database password).
+
+Having more than one pop-up on a page is bad.  They overlap so that you can only see the top
+one.
