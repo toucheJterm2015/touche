@@ -55,6 +55,7 @@ class MasterTestTouche(unittest.TestCase):
         self.base_url = "http://localhost/~touche/Test_Contest"
         AdminLoginTest.AdminLoginTest().test_admin_login_test()
         SetupContestTest.SetupContestTest().test_setup_contest_test()
+        #contest setup has so many functions that a comprehensive set of tests to make sure everything works has not been made yet.
         SetupProblemsTest.SetupProblemsTest().test_setup_problems_test()
         AddEditDeleteProblems.AddEditDeleteProblems().test_add_edit_delete_problems()
         DataSetsAndProblems.DataSetsAndProblems().test_data_sets_and_problems()
@@ -62,7 +63,12 @@ class MasterTestTouche(unittest.TestCase):
         AddEditDeleteSites.AddEditDeleteSites().test_add_edit_delete_sites
         SetupTeamsTest.SetupTeamsTest().test_setup_team_test()
         AddEditDeleteTeams.AddEditDeleteTeams().test_add_edit_delete_teams
-        
+        SetupCategoriesTest.SetupCategoriesTest().test_setup_categories_test()
+        SetupHeadersForbiddenTest.SetupHeadersForbiddenTest().test_setup_headers_forbidden()
+        #there currently is no test which tries to add and remove words from the lists of standard headers or forbidden words.
+        MiscTest.MiscTest().test_misc()
+        #misc has so many functions that a comprehensive set of tests to make sure everything works has not been made yet.
+        TestAndStart.TestAndStart().test_and_start()
         
 #this is also common to all the auto-generated code.
 if __name__ == "__main__":

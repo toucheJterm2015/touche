@@ -1,3 +1,4 @@
+# may make other tests fail because deleting problems is buggy (may be to do with problem ID)
 # -*- coding: utf-8 -*-
 from selenium import webdriver
 from selenium.webdriver.common.by import By

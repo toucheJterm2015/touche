@@ -30,16 +30,7 @@ class TestAndStart(unittest.TestCase):
         
         #clears the contest in case it has been started before, so all of the sites are listed as not-yet started.
         driver.get(self.base_url + "/admin/misc.php")
-        driver.find_element_by_name("B2").click()
-        
-        #makes sure there are two sites to work with
-        driver.get(self.base_url + "/admin/setup_site.php")
-        driver.find_element_by_name("site_name").clear()
-        driver.find_element_by_name("site_name").send_keys("PrimarySite")
-        driver.find_element_by_name("submit").click()
-        driver.find_element_by_name("site_name").clear()
-        driver.find_element_by_name("site_name").send_keys("SecondarySite")
-        driver.find_element_by_name("submit").click()
+        driver.find_element_by_name("B2").click()#this is the "clear contest" button
         
         driver.get(self.base_url + "/admin/start.php")
         

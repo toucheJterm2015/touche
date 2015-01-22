@@ -33,39 +33,60 @@ class DataSetsAndProblemsTest(unittest.TestCase):
         except AssertionError as e: self.verificationErrors.append(str(e))
         driver.get(self.base_url + "/admin/setup_problems.php")
         driver.find_element_by_name("problem_name").clear()
-        driver.find_element_by_name("problem_name").send_keys("Guess the number three")
+        driver.find_element_by_name("problem_name").send_keys("problem1")
         driver.find_element_by_name("problem_short_name").clear()
-        driver.find_element_by_name("problem_short_name").send_keys("guess3")
+        driver.find_element_by_name("problem_short_name").send_keys("prob1")
         driver.find_element_by_name("problem_note").clear()
-        driver.find_element_by_name("problem_note").send_keys("asdgdasgghkasdgjh asdgkhasdgdkjasghs dagasdgj ssdg")
+        driver.find_element_by_name("problem_note").send_keys("it is a description")#apostrophes currently break things (sql injection)
         driver.find_element_by_name("submit").click()
-        driver.find_element_by_link_text("Edit").click()
-        driver.find_element_by_name("html_file").clear()
-        driver.find_element_by_name("html_file").send_keys(self.base_url + "/../touche_mel/testing/placeholder.txt")#replace with the proper path to the html
-        driver.find_element_by_name("pdf_file").clear()
-        driver.find_element_by_name("pdf_file").send_keys(self.base_url + "/../touche_mel/testing/placeholder.txt")#replace with the proper path to the pdf
+        driver.find_element_by_name("problem_name").clear()
+        driver.find_element_by_name("problem_name").send_keys("problem2")
+        driver.find_element_by_name("problem_short_name").clear()
+        driver.find_element_by_name("problem_short_name").send_keys("prob2")
+        driver.find_element_by_name("problem_note").clear()
+        driver.find_element_by_name("problem_note").send_keys("it is a description yay")#apostrophes currently break things (sql injection)
         driver.find_element_by_name("submit").click()
+        
+        #this will currently break due to issues with uploading through text/PhantomJS. See documentation/aNoteAboutTheStateOfTheTests.txt
+        #driver.find_element_by_link_text("Edit").click()
+        #driver.find_element_by_name("html_file").clear()
+        #driver.find_element_by_name("html_file").send_keys(self.base_url + "placeholder")#replace with the proper path to the html
+        #driver.find_element_by_name("pdf_file").clear()
+        #driver.find_element_by_name("pdf_file").send_keys(self.base_url + "placeholder")#replace with the proper path to the pdf
+        #driver.find_element_by_name("submit").click()
+        #if you want to comment out these lines, the only actual issue is that there is no problem visible that contestants can see. We need to test it, but for now, it isn't essential for testing admin things.
+        
+        #back to useful, functional code.
         driver.find_element_by_link_text("Data").click()
         try: self.assertTrue(self.is_element_present(By.LINK_TEXT, "Add new data set"))
         except AssertionError as e: self.verificationErrors.append(str(e))
         try: self.assertNotRegexpMatches(driver.find_element_by_css_selector("div.col-md-6").text, r"^[\s\S]*Adding data[\s\S]*$")
         except AssertionError as e: self.verificationErrors.append(str(e))
         driver.find_element_by_link_text("Add new data set").click()
+        
+        #more uploading issues. These are currently essential to starting the contest.
         driver.find_element_by_name("data_set_in").clear()
-        driver.find_element_by_name("data_set_in").send_keys(self.base_url + "/../touche_mel/testing/placeholder.txt")#replace with the proper path to input
+        driver.find_element_by_name("data_set_in").send_keys(self.base_url + "placeholder")#replace with the proper path to input
         driver.find_element_by_name("data_set_out").clear()
-        driver.find_element_by_name("data_set_out").send_keys(self.base_url + "/../touche_mel/testing/placeholder.txt")#replace with the proper path to a matching output file
+        driver.find_element_by_name("data_set_out").send_keys(self.base_url + "placeholder")#replace with the proper path to a matching output file
+        #end file upload
+        
         driver.find_element_by_name("submit").click()
         try: self.assertNotRegexpMatches(driver.find_element_by_css_selector("div.col-md-6").text, r"^[\s\S]*Adding data[\s\S]*$")
         except AssertionError as e: self.verificationErrors.append(str(e))#the form to add data should not be visible once the data is added.
-        driver.find_element_by_link_text("Add new data set").click()#repeat as many times as necessary depending on how many I/O pairs you have.
-        driver.find_element_by_name("data_set_in").send_keys(self.base_url + "/../touche_mel/testing/placeholder.txt")#replace with the proper path to input
+        driver.find_element_by_xpath("//a[contains(text(), 'Add new data set')][2]").click()#add data to the second problem. Repeat as necessary for how many data sets you want to use.
+        
+        #more uploading problems...
+        driver.find_element_by_name("data_set_in").clear()
+        driver.find_element_by_name("data_set_in").send_keys(self.base_url + "placeholder")#replace with the proper path to input
         driver.find_element_by_name("data_set_out").clear()
-        driver.find_element_by_name("data_set_out").send_keys(self.base_url + "/../touche_mel/testing/placeholder.txt")#replace with the proper path to a matching output file
+        driver.find_element_by_name("data_set_out").send_keys(self.base_url + "placeholder")#replace with the proper path to a matching output file
+        #end upload
+        
         driver.find_element_by_name("submit").click()
-        try: self.assertTrue(self.is_element_present(By.XPATH, "//tr[4]"))
+        try: self.assertTrue(self.is_element_present(By.XPATH, "//tr[4]"))#there are two problems names and two data sets taking up four rows in the table.
         except AssertionError as e: self.verificationErrors.append(str(e))
-        try: self.assertRegexpMatches(driver.find_element_by_css_selector("div.col-md-5").text, r"^[\s\S]*placeholder[\s\S]*$")
+        try: self.assertRegexpMatches(driver.find_element_by_css_selector("div.col-md-5").text, r"^[\s\S]*placeholder[\s\S]*$")#change this when you change the placeholder strings. This should be one of the input file names.
         except AssertionError as e: self.verificationErrors.append(str(e))
     
     def is_element_present(self, how, what):
