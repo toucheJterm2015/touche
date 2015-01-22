@@ -1,4 +1,7 @@
-(enhancements from the issues log are not included, but everything else is)
+(enhancements from the issues log on github are not included, but everything else is)
+(for the most part things are organized by role, and then by page)
+(An x at the beginning of a line means that we think there is a test for that)
+
 I DONT KNOW WHERE THESE GO 
 Java logs get overwritten
     [[ cannot currently go in the UI testing because the files are only
@@ -309,14 +312,14 @@ JUDGE---------------------------------------------------------------------
 NOT PAGE SPECIFIC
 judge/clarification_response_form.php has not been bootstrap-ed - test for this
 Login functionality
-2 Timers [[What does this mean?]]
+2 Timers [[What does this mean?]] (at the top of the page - the timers)
 Queued submissions counter displays 
-	-Submissions are cleared from the queue appropriately
+	x Submissions are cleared from the queue appropriately
 Unanswered clarifications counter 
 Time of day (top of the page)
 Displaying submissions (applies to multiple, but not all pages)
 	-Judge submission link
-		-Link exists
+		x Link exists
 		-Judging submission page
 			-All submission description info is correct
 			-"Final result" drop down default value is equal to auto response
@@ -352,7 +355,7 @@ Displaying submissions (applies to multiple, but not all pages)
 		-Auto response is accurate
 
 JUDGE SUBMISSIONS
-Only un-judged submissions are shown
+x Only un-judged submissions are shown
 
 REVIEW JUDGEMENTS
 Only submissions judged by the current user are shown (is there only one judge account?)
@@ -363,9 +366,9 @@ Only submissions judged by the current user are shown (is there only one judge a
     knows who gave the initial judgement.]]
 
 PROBLEMS
-All problems are displayed
+x All problems are displayed
 Problem name and number are correct
-HTML and PDF files display correctly
+x HTML and PDF files display correctly
 
 CLARIFICATIONS
 Both "sort by" options sort results correctly
@@ -375,7 +378,7 @@ All problem names are shown as an option for sorting
 "Respond to Clarification" and "Ignore Clarification" links exist where they should and work
 All information is correct, and correctly displayed for each shown clarification 
 Make new clarification/respond to clarification 
-	-Link exists from clarifications page
+	x link exists from clarifications page
 	-All  problems, as well as general, are available from dropdown
 	-Question is correctly displayed (or not displayed)
 	
@@ -397,21 +400,17 @@ Both times display correctly
 
 ALTERNATE SUBSTITUTION PAGE
 Page shows only when it should
-    [[which is...]]
-Result is stored correctly
+    [[which is...]] (the first time that a team with an alternate logs in)
+Result is stored correctly (only way to test is by lookin in the data base)
 
 PROBLEMS PAGE
 Problem number and name are with the correct documents
-html and pdf display correctly
-Documents are not viewable for inactive contests
+x html and pdf display correctly
+Documents are only viewable for active contests
 
 
 SUBMISSIONS
-File upload 
-	-works (no corruptions, etc.)
-	    [[Not web accessible.]]
-	-File stays paired with correct problem
-	    [[Not web accessible.]]
+xFile upload 
 Submissions are displayed correctly
 	-Correct coloring
 	-Correct information (especially the result from judge)
@@ -425,11 +424,11 @@ easily be forgotten include: ties between teams; problem submitted,
 but not yet graded; and no correct submissions for a problem.  There
 are many more scenarios that need to be explored.]]
 Team name stays connected to correct standings
-All problems are displayed
-Minutes displayed for each problem correct
-Number of attempts for each problem displayed correctly
-Number of problems complete displayed correctly 
-"Score" (in minutes) displayed correctly
+x All problems are displayed
+x Minutes displayed for each problem correct
+x Number of attempts for each problem displayed correctly
+x Number of problems complete displayed correctly 
+x "Score" (in minutes) displayed correctly
 Freeze stops rankings and other team's scores from changing (freeze happens at correct time for each site)
 Category filter works
 
@@ -438,5 +437,5 @@ Filters work
 All information is correct
 
 README
-Document displays
+x Document displays
 Update document??
