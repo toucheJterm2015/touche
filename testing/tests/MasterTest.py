@@ -17,7 +17,7 @@ class MasterTestTouche(unittest.TestCase):
     def setUp(self):
         self.driver = webdriver.PhantomJS("/usr/local/bin/phantomjs")
         self.driver.implicitly_wait(30)
-        self.base_url = "http://localhost/~touche/"#this will be changed after the contest creation to "http://localhost/~touche/Test_Contest"
+        self.base_url = "http://localhost/~touche"#this will be changed after the contest creation to "http://localhost/~touche/Test_Contest"
         self.verificationErrors = []
         self.accept_next_alert = True
     
@@ -47,8 +47,22 @@ class MasterTestTouche(unittest.TestCase):
         self.assertEqual([], self.verificationErrors)
         
     #this is the main function that I'm actually writing.
+    #hopefully this is in a logical order: create the contest, ensure that the first login forces the user to change the password, then log in properly and make sure everything is there, occasionally visiting things out of order to make sure users are directed to the correct order.
+    #looks at admin first, then team, then judge
     def test_master_test_touche(self):
+        #setup and admin tests
+        CreateContestTests.CreateContestTests().test_create_contest_tests()
+        self.base_url = "http://localhost/~touche/Test_Contest"
+        AdminLoginTest.AdminLoginTest().test_admin_login_test()
+        SetupContestTest.SetupContestTest().test_setup_contest_test()
+        SetupProblemsTest.SetupProblemsTest().test_setup_problems_test()
         AddEditDeleteProblems.AddEditDeleteProblems().test_add_edit_delete_problems()
+        DataSetsAndProblems.DataSetsAndProblems().test_data_sets_and_problems()
+        SetupSiteTest.SetupSiteTest().test_setup_site_test()
+        AddEditDeleteSites.AddEditDeleteSites().test_add_edit_delete_sites
+        SetupTeamsTest.SetupTeamsTest().test_setup_team_test()
+        AddEditDeleteTeams.AddEditDeleteTeams().test_add_edit_delete_teams
+        
         
 #this is also common to all the auto-generated code.
 if __name__ == "__main__":

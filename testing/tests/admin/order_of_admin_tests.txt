@@ -35,8 +35,8 @@ x 5
 xo 6
 xx 7
 xx 8
-oo 9
-oo 10
+xx 9
+xx 10
 oo 11
 oo 12
 oo 13
