@@ -1,6 +1,3 @@
-#! usr/bin/python
-
-# this is just the presence-of (buttons, text fields...) tests, not the functionality tests
 # -*- coding: utf-8 -*-
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -10,48 +7,43 @@ from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import NoAlertPresentException
 import unittest, time, re
 
-class AdminLoginTest(unittest.TestCase):
+class AddEditDeleteSites(unittest.TestCase):
     def setUp(self):
         self.driver = webdriver.PhantomJS("/usr/local/bin/phantomjs")
         self.driver.implicitly_wait(30)
-        self.base_url = "http://localhost"
+        self.base_url = "http://localhost/~touche/Test_Contest"
         self.verificationErrors = []
         self.accept_next_alert = True
     
-    def test_admin_login(self):
+    def test_add_edit_delete_sites(self):
         driver = self.driver
-        driver.get(self.base_url + "/~mschmock/Contest/admin/index.php")
+        
+        #should be moved to separate function, but for now when I try to do so, it breaks.
+        driver.get(self.base_url + "/admin/index.php")
         user = driver.find_element_by_name("user")
         user.clear()
         user.send_keys("admin")
         driver.find_element_by_name("password").clear()
         driver.find_element_by_name("password").send_keys("password")
         driver.find_element_by_name("submit").click()
-        try: self.assertEqual("Edit Contest Info", driver.find_element_by_css_selector("div.table-responsive > table.table > tbody > tr").text)
-        except AssertionError as e: self.verificationErrors.append(str(e))
-        driver.get(self.base_url + "/~mschmock/Contest/admin/index.php")
-        driver.find_element_by_name("user").clear()
-        driver.find_element_by_name("user").send_keys("admin")
-        driver.find_element_by_name("password").clear()
-        driver.find_element_by_name("password").send_keys("admin")
+        #end of what should be the login function
+        
+        driver.get(self.base_url + "/~mschmock/Contest/admin/setup_site.php")
+        driver.find_element_by_name("site_name").clear()
+        driver.find_element_by_name("site_name").send_keys("My New Site")
         driver.find_element_by_name("submit").click()
-        try: self.assertRegexpMatches(driver.find_element_by_css_selector("div.row").text, r"^Admin Login[\s\S]*$")
+        try: self.assertRegexpMatches(driver.find_element_by_css_selector("div.col-md-6").text, r"^[\s\S]*My New Site[\s\S]*$")
         except AssertionError as e: self.verificationErrors.append(str(e))
-        driver.get(self.base_url + "/~mschmock/Contest/admin/index.php")
-        driver.find_element_by_name("user").clear()
-        driver.find_element_by_name("user").send_keys("")
-        driver.find_element_by_name("password").clear()
-        driver.find_element_by_name("password").send_keys("password")
+        driver.find_element_by_xpath("//td[contains(text(), \"My New Site\")]/../td[2]/a").click()
+        driver.find_element_by_name("site_name").clear()
+        driver.find_element_by_name("site_name").send_keys("Site Renamed")
         driver.find_element_by_name("submit").click()
-        try: self.assertRegexpMatches(driver.find_element_by_css_selector("div.row").text, r"^Admin Login[\s\S]*$")
+        try: self.assertNotRegexpMatches(driver.find_element_by_css_selector("div.col-md-6").text, r"^[\s\S]*My New Site[\s\S]*$")
         except AssertionError as e: self.verificationErrors.append(str(e))
-        driver.get(self.base_url + "/~mschmock/Contest/admin/index.php")
-        driver.find_element_by_name("user").clear()
-        driver.find_element_by_name("user").send_keys("")
-        driver.find_element_by_name("password").clear()
-        driver.find_element_by_name("password").send_keys("")
-        driver.find_element_by_name("submit").click()
-        try: self.assertRegexpMatches(driver.find_element_by_css_selector("div.row").text, r"^Admin Login[\s\S]*$")
+        try: self.assertRegexpMatches(driver.find_element_by_css_selector("div.col-md-6").text, r"^[\s\S]*Site Renamed[\s\S]*$")
+        except AssertionError as e: self.verificationErrors.append(str(e))
+        driver.find_element_by_xpath("//td[contains(text(), \"Site Renamed\")]/../td[3]/a").click()
+        try: self.assertNotRegexpMatches(driver.find_element_by_css_selector("div.col-md-6").text, r"^[\s\S]*Site Renamed[\s\S]*$")
         except AssertionError as e: self.verificationErrors.append(str(e))
     
     def is_element_present(self, how, what):

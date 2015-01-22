@@ -14,7 +14,7 @@ class SetupProblemsTest(unittest.TestCase):
     def setUp(self):
         self.driver = webdriver.PhantomJS("/usr/local/bin/phantomjs")
         self.driver.implicitly_wait(15)
-        self.base_url = "http://localhost"
+        self.base_url = "http://localhost/~touche/Test_Contest"
         self.verificationErrors = []
         self.accept_next_alert = True
     
@@ -22,7 +22,7 @@ class SetupProblemsTest(unittest.TestCase):
         driver = self.driver
         
         #should be moved to separate function, but for now when I try to do so, it breaks.
-        driver.get(self.base_url + "/~mschmock/Contest/admin/index.php")
+        driver.get(self.base_url + "/admin/index.php")
         user = driver.find_element_by_name("user")
         user.clear()
         user.send_keys("admin")
@@ -31,7 +31,7 @@ class SetupProblemsTest(unittest.TestCase):
         driver.find_element_by_name("submit").click()
         #end of what should be the login function
         
-        driver.get(self.base_url + "/~mschmock/Contest/admin/setup_problems.php")
+        driver.get(self.base_url + "/admin/setup_problems.php")
         try: self.assertTrue(self.is_element_present(By.CSS_SELECTOR, "div.col-md-6"))
         except AssertionError as e: self.verificationErrors.append(str(e)+" test 1")
         try: self.assertEqual("Add or Edit Problems", driver.find_element_by_css_selector("div.table-responsive > table.table > tbody > tr > td > h3").text)

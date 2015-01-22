@@ -14,7 +14,7 @@ class AdminHeaderTestAllPages(unittest.TestCase):
     def setUp(self):
         self.driver = webdriver.PhantomJS("/usr/local/bin/phantomjs")
         self.driver.implicitly_wait(30)
-        self.base_url = "http://localhost"
+        self.base_url = "http://localhost/~touche/Test_Contest"
         self.verificationErrors = []
         self.accept_next_alert = True
     
@@ -22,7 +22,7 @@ class AdminHeaderTestAllPages(unittest.TestCase):
         driver = self.driver
         
         #should be moved to separate function, but for now when I try to do so, it breaks.
-        driver.get(self.base_url + "/~mschmock/Contest/admin/index.php")
+        driver.get(self.base_url + "/admin/index.php")
         user = driver.find_element_by_name("user")
         user.clear()
         user.send_keys("admin")
@@ -31,6 +31,7 @@ class AdminHeaderTestAllPages(unittest.TestCase):
         driver.find_element_by_name("submit").click()
         #end of what should be the login function
         
+        #this test goes to each main admin page in turn and checks that they are on the expected page, and all of the navbar and related things that should be on all the admin pages are actually there.
         try: self.assertEqual("Details", driver.find_element_by_xpath("//li[contains(@class, \"active\")]").text)
         except AssertionError as e: self.verificationErrors.append(str(e))
         self.check_each_page
@@ -81,7 +82,7 @@ class AdminHeaderTestAllPages(unittest.TestCase):
         self.check_each_page
         
     
-	#this test was so repetitive, I cut the commands out and pasted them into a separate function to save space.
+	#this batch of presence-of tests was so repetitive, I cut the commands out and pasted them into a separate function to give future developers half a chance of understanding what's going on.
     def check_each_page():
         try: self.assertTrue(self.is_element_present(By.CSS_SELECTOR, "div.panel-body"))
         except AssertionError as e: self.verificationErrors.append(str(e))

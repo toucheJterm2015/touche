@@ -27,10 +27,10 @@ CREATE CONTEST (1)
     gets passed to shell commands as part of the creation.  As a
     result, you'll really have to limit the set of legal characters to
     avoid both types of injection.]]
-- initial page shall support login to system
+x initial page shall support login to system
 - shall have header text "ADMIN" once logged in (is this really necessary? In current implementation, it's hidden in the header bar)
 - shall have text "Initial Contest Setup"
-- page shall have short text input fields for the contest name, contest host name, database host name, and a password to use with the database host
+x page shall have short text input fields for the contest name, contest host name, database host name, and a password to use with the database host
  -* the page shall test for valid input in all four fields before allowing the form to submit
 - page shall have submit button
  -* submit button shall work iff all fields are filled in (OR trying to submit w/o all fields filled in shall pop up with an error rather than going to the next page)
@@ -62,23 +62,23 @@ CREATE CONTEST (2)
   - with the partial information from the CREATE CONTEST (1) page
     [[Not web accessible.]]
 - the script shall change placeholder text in the readme to a current URL that links to the current contest
-- if any of these functions fail, the page shall print an error message
-- the page shall include a link to the administration login page (if the contest is created successfully)
+x if any of these functions fail, the page shall print an error message
+x the page shall include a link to the administration login page (if the contest is created successfully)
 
 ADMIN PAGES----------------------------------------------------------------
 
 Index
-- page shall support login to system
+x page shall support login to system
  - for new administrators, the username and password are both "admin" (if changed, reflect change in the readmes and/or instruction documents)
 [[-on first login the password is required to be changed]] I meant if the default, first-login password was changed, sorry for not being clear
- - for returning administrators, the username and password shall be whatever they have set
+ x for returning administrators, the username and password shall be whatever they have set
 
 ChangePW
-- the page shall contain the text "Login Information" in a statement suggesting change. (The current "Please change your Login Information" is sufficient, as is the fragment/title "New Login Information")
-- the page shall contain a form with one short text input field and two password input fields and a submit button
+x the page shall contain the text "Login Information" in a statement suggesting change. (The current "Please change your Login Information" is sufficient, as is the fragment/title "New Login Information")
+x the page shall contain a form with one short text input field and two password input fields and a submit button
  - the fields shall check whether their input is valid (the two password fields must have the same content)
  - the submit button shall have the text "Change"
- - the submit button shall refresh the page if the form does not have valid input
+ x the submit button shall refresh the page if the form does not have valid input
  - the submit button shall POST to (this same php document)? if the input is valid, then redirect to the SetupContest page
   - this action shall update the database of user/password combinations
     [[Not web accessible.]]
@@ -138,11 +138,11 @@ SetupProblems
     purposes.  Spaces are especially deadly here.]]
  x long text entry field for notes about the problem THIS CURRENTLY DOES NOT ALLOW APOSTROPHES WHICH MIGHT BE A PROBLEM
  x upload form for the html version of the problem
- [[Check that these are not visible until the contest is started!
+  -[[Check that these are not visible until the contest is started!
     We've had people try to check by looking at problems before
     contests were started and saved by this feature being present.]]
  x upload form for the pdf version of the problem
- [[Check that these are not visible until the contest is started!
+  -[[Check that these are not visible until the contest is started!
     We've had people try to check by looking at problems before
     contests were started and saved by this feature being present.]]
  x submit button which shall POST the new problem to the database
@@ -168,10 +168,10 @@ SetupDataSets
     one problem has been added to the contest.  If someone tries to go
     here prior to a problem, they should be redirected to the
     SetupProblems link so they can add a problem first.]]
-- the page shall contain a table of all the problems, with the following for each problem:
+x the page shall contain a table of all the problems, with the following for each problem:
  - the problem name
  - a link to add a new data set (which will GET the problem (based on its id) from the database and fill in the following form)
- - on individual lines, any I/O data sets already submitted for that problem and a link to delete each one (which obviously sends a DELETE request to the database)
+ x on individual lines, any I/O data sets already submitted for that problem and a link to delete each one (which obviously sends a DELETE request to the database)
 - the page shall contain a form which initially contains the text "Select a problem to add a data set"
 - once a problem has been selected, this form shall have two file-upload inputs
  - these are respectively for the input and output files the contestants' programs will be interacting with/trying to match
@@ -190,7 +190,7 @@ SetupDataSets
     runs as expected.]]
  
 SetupSite
-- the page shall have a form with the title "Add a new site" and a single short entry text field for the site name
+x the page shall have a form with the title "Add a new site" and a single short entry text field for the site name
  - the submit button on this form shall POST to the database
 - the page shall also have a table with the title "Edit a Site"
  - the table shall include, on each row:
@@ -237,17 +237,12 @@ SetupTeams
  - when the Edit link is clicked, the form shall auto-fill its fields from the database, including the checkbox indicating whether the team is a test team
  
 SetupCategories
-- the page shall have a form to add a new category (title, short text entry, submit button)
-- the page shall have a [[???]]
- - the submit button shall only work if there is text in the text entry field. If there is, the form shall POST to the database and create the new category
-    [[I forget which fields are required.  I would like it so that
-    title is required and short text entry is optional.  If the short
-    title is not entered, then the rest of the contest assumes the
-    short entry is the same as the full title.]]
-- the page shall include a table of categorys with a title as well as the standard category name, edit (GET), and DELETE options
- - when Edit is pressed, the form shall put the name of the category into the lone text field and change the title and button text to "Rename category"
-- the form shall have a second table/form, this one with:
- - column titles "Team Name" and then the names of categories such that all categories have a column
+x the page shall have a form to add a new category (title, short text entry, submit button)
+ - the submit button shall only work if there is text in the text field. If there is, the form shall POST to the database and create the new category
+x the page shall include a table of categories with a title as well as the standard category name, edit (GET), and DELETE options
+ x when Edit is pressed, the form shall put the name of the category into the lone text field and change the title and button text to "Rename category"
+x the form shall have a second table/form, this one with:
+ x column titles "Team Name" and then the names of categories such that all categories have a column
  - the rows shall be the team names such that every team is included in the "Team Name" column
  - the rest of the fields in the table shall be editable checkboxes
  - when the submit button is pressed, the form shall POST and DELETE as necessary to the CATEGORY_TEAMS table in the database
@@ -255,10 +250,10 @@ SetupCategories
     [[NOTE: A category is not required to have a team.]]
  
 SetupHeaders / SetupForbidden (these are so similar, I'm not writing the requirements twice. Change precise text as needed)
-- the page shall have a table with"
- - the title "Edit Current [Headers/Forbidden]"
- - each row shall have an accepted language name and an option to edit(GET), but no DELETE (if you want to add or remove accepted languages, you have to go back and add or remove from the source code)
-    [[Do not show a language's forbidden words entry if it was
+x the page shall have a table with"
+ x the title "Edit Current [Headers/Forbidden]"
+ x each row shall have an accepted language name and an option to edit(GET), but no DELETE (if you want to add or remove accepted languages, you have to go back and add or remove from the source code)
+  x [[Do not show a language's forbidden words entry if it was
     unchecked on the first set up page.  In other words, if we don't
     support forbidden words for Java, do not allow the user to enter
     any words for it and be under the mistaken impression that there
@@ -271,15 +266,15 @@ SetupHeaders / SetupForbidden (these are so similar, I'm not writing the require
     pulled from/inserted into the database.]]
 
 Misc
-- the page shall contain a form (table with many sub-forms?) with the following:
+x the page shall contain a form (table with many sub-forms?) with the following:
     [[I forget if we implemented it with one form and multiple submit
     buttons within one form or multiple forms each with a single
     submit button.  Either implementation is acceptable.]]
- - hh:mm:ss time entry field to input an amount of time to extend the contest by + submit button
- - a button to "clear" the contest (probably needs a better name; it just reverts all sites to inactive and removes submissions. Problem , team, category, and other data will remain as it was
- - a short entry text field and button to clone a contest (when given a name, clones all contest data from one database to another in the same system, otherwise does nothing)
- - a short entry text field which takes an administrator's email and a button that promises to compress the problem files and send them to the entered email address
-    [[This should send more than the problem files.  It should send
+ x hh:mm:ss time entry field to input an amount of time to extend the contest by + submit button
+ x a button to "clear" the contest (probably needs a better name; it just reverts all sites to inactive and removes submissions. Problem , team, category, and other data will remain as it was
+ x a short entry text field and button to clone a contest (when given a name, clones all contest data from one database to another in the same system, otherwise does nothing)
+ x a short entry text field which takes an administrator's email and a button that promises to compress the problem files and send them to the entered email address
+  - [[This should send more than the problem files.  It should send
     everything generated by the contest.  That includes problem files,
     submitted solutions, log files, output results for each
     submission, etc.  It should not include things like the jails that
@@ -302,15 +297,12 @@ Misc
     updated standings once those are all complete.]]
 
 Start
-- the page shall contain a table with a title "Start Contest" and the following:
- - in each row, the name of a site, started or not
-    [[The rows must be disabled if the contest has not be started or
-    test-started.  Once it has been, then the appropriate checkboxes
-    will be enabled to allow the user to affect the particular sites
-    in question.]]
-  - if the site has not yet been officially started, a checkbox on the same row
-  - if the site has been test-started, text indicating that status as well as the checkbox
- - two submit buttons (one for start, one for test-start) which will start/test-start the contest for all sites with checked boxes.
+x the page shall contain a table with a title "Start Contest" and the following:
+ x in each row, the name of a site, started or not
+  x if the site has not yet been officially started, a checkbox on the same row
+  x if the site has been started, text will replace the checkbox saying so
+  x if the site has been test-started, text indicating that status as well as the checkbox
+ x two submit buttons (one for start, one for test-start) which will start/test-start the contest for all sites with checked boxes.
 
 
 JUDGE---------------------------------------------------------------------

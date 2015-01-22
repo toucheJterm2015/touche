@@ -1,6 +1,3 @@
-#! usr/bin/python
-
-# this is just the presence-of (buttons, text fields...) tests, not the functionality tests
 # -*- coding: utf-8 -*-
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -10,19 +7,19 @@ from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import NoAlertPresentException
 import unittest, time, re
 
-class SetupTeamsTest(unittest.TestCase):
+class MiscTest(unittest.TestCase):
     def setUp(self):
         self.driver = webdriver.PhantomJS("/usr/local/bin/phantomjs")
         self.driver.implicitly_wait(30)
-        self.base_url = "http://localhost"
+        self.base_url = "http://localhost/~touche/Test_Contest"
         self.verificationErrors = []
         self.accept_next_alert = True
     
-    def test_setup_teams(self):
+    def test_misc(self):
         driver = self.driver
         
         #should be moved to separate function, but for now when I try to do so, it breaks.
-        driver.get(self.base_url + "/~mschmock/Contest/admin/index.php")
+        driver.get(self.base_url + "/admin/index.php")
         user = driver.find_element_by_name("user")
         user.clear()
         user.send_keys("admin")
@@ -31,42 +28,40 @@ class SetupTeamsTest(unittest.TestCase):
         driver.find_element_by_name("submit").click()
         #end of what should be the login function
         
-        driver.get(self.base_url + "/~mschmock/Contest/admin/setup_teams.php")
-        try: self.assertTrue(self.is_element_present(By.NAME, "team_name"))
+        driver.get(self.base_url + "/admin/misc.php")
+        try: self.assertTrue(self.is_element_present(By.CSS_SELECTOR, "div.innerglow"))
         except AssertionError as e: self.verificationErrors.append(str(e))
-        try: self.assertTrue(self.is_element_present(By.NAME, "organization"))
+        try: self.assertTrue(self.is_element_present(By.NAME, "ext_hour"))
         except AssertionError as e: self.verificationErrors.append(str(e))
-        try: self.assertTrue(self.is_element_present(By.NAME, "username"))
+        try: self.assertTrue(self.is_element_present(By.NAME, "ext_minute"))
         except AssertionError as e: self.verificationErrors.append(str(e))
-        try: self.assertTrue(self.is_element_present(By.NAME, "password"))
+        try: self.assertTrue(self.is_element_present(By.NAME, "ext_second"))
         except AssertionError as e: self.verificationErrors.append(str(e))
-        try: self.assertTrue(self.is_element_present(By.NAME, "coach_name"))
+        try: self.assertTrue(self.is_element_present(By.NAME, "B1"))
         except AssertionError as e: self.verificationErrors.append(str(e))
-        try: self.assertTrue(self.is_element_present(By.NAME, "contestant_1_name"))
+        try: self.assertTrue(self.is_element_present(By.NAME, "B2"))
         except AssertionError as e: self.verificationErrors.append(str(e))
-        try: self.assertTrue(self.is_element_present(By.NAME, "contestant_2_name"))
+        try: self.assertTrue(self.is_element_present(By.NAME, "clone_name"))
         except AssertionError as e: self.verificationErrors.append(str(e))
-        try: self.assertTrue(self.is_element_present(By.NAME, "contestant_3_name"))
+        try: self.assertTrue(self.is_element_present(By.NAME, "B3"))
         except AssertionError as e: self.verificationErrors.append(str(e))
-        try: self.assertTrue(self.is_element_present(By.NAME, "alternate_name"))
+        try: self.assertTrue(self.is_element_present(By.NAME, "admin_email"))
         except AssertionError as e: self.verificationErrors.append(str(e))
-        try: self.assertTrue(self.is_element_present(By.NAME, "email"))
+        try: self.assertTrue(self.is_element_present(By.NAME, "B4"))
         except AssertionError as e: self.verificationErrors.append(str(e))
-        try: self.assertTrue(self.is_element_present(By.NAME, "site_id"))
+        try: self.assertTrue(self.is_element_present(By.XPATH, "//button[@value='recalculate responses']"))
         except AssertionError as e: self.verificationErrors.append(str(e))
-        try: self.assertTrue(self.is_element_present(By.NAME, "test_team"))
+        try: self.assertRegexpMatches(driver.find_element_by_css_selector("div.innerglow").text, r"^[\s\S]*Misc[\s\S]*$")
         except AssertionError as e: self.verificationErrors.append(str(e))
-        try: self.assertTrue(self.is_element_present(By.NAME, "submit"))
+        try: self.assertRegexpMatches(driver.find_element_by_css_selector("div.innerglow").text, r"^[\s\S]*Extend[\s\S]*$")
         except AssertionError as e: self.verificationErrors.append(str(e))
-        try: self.assertTrue(self.is_element_present(By.CSS_SELECTOR, "td > h3"))
+        try: self.assertRegexpMatches(driver.find_element_by_css_selector("div.innerglow").text, r"^[\s\S]*Clear Contest[\s\S]*$")
         except AssertionError as e: self.verificationErrors.append(str(e))
-        try: self.assertTrue(self.is_element_present(By.CSS_SELECTOR, "div.col-md-5"))
+        try: self.assertRegexpMatches(driver.find_element_by_css_selector("div.innerglow").text, r"^[\s\S]*Clone Contest[\s\S]*$")
         except AssertionError as e: self.verificationErrors.append(str(e))
-        try: self.assertTrue(self.is_element_present(By.CSS_SELECTOR, "div.col-md-6"))
+        try: self.assertRegexpMatches(driver.find_element_by_css_selector("div.innerglow").text, r"^[\s\S]*Send Zip[\s\S]*$")
         except AssertionError as e: self.verificationErrors.append(str(e))
-        try: self.assertRegexpMatches(driver.find_element_by_css_selector("div.col-md-6").text, r"^[\s\S]*Add[\s\S]*$")
-        except AssertionError as e: self.verificationErrors.append(str(e))
-        try: self.assertRegexpMatches(driver.find_element_by_css_selector("div.col-md-5").text, r"^[\s\S]*Edit[\s\S]*$")
+        try: self.assertRegexpMatches(driver.find_element_by_css_selector("div.innerglow").text, r"^[\s\S]*Recalculate[\s\S]*$")
         except AssertionError as e: self.verificationErrors.append(str(e))
     
     def is_element_present(self, how, what):

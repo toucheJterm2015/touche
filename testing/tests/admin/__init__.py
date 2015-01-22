@@ -1,0 +1,1 @@
+__all__ = ["AddEditDeleteProblems", "AddEditDeleteSite", "AddEditDeleteTeam", "AdminHeaderTestAllPages", "AdminLoginTest", "CreateContestTests", "DataSetsAndProblemsTest", "MiscTest", "SetupContestTest", "SetupCategoriesTest", "SetupHeadersForbiddenTest", "SetupProblemsTest", "SetupSiteTest", "SetupTeamsTest", "TestAndStart"]
