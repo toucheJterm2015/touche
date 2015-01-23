@@ -55,77 +55,94 @@ class MasterTestTouche(unittest.TestCase):
         #setup and admin tests
         t = CreateContestTests.CreateContestTests(self.base_url)
         t.test_create_contest_tests()
-        t.tearDown()
+        try: t.tearDown()
+        except AssertionError as e: self.verificationErrors.append(str(e))
         self.base_url = config.base_url + "Test_Contest"
         
-        t = DataSetsAndProblems.DataSetsAndProblems(self.base_url)
+        t = DataSetsAndProblemsTest.DataSetsAndProblemsTest(self.base_url)
         t.test_data_sets_and_problems()
-        t.tearDown()
+        try: t.tearDown()
+        except AssertionError as e: self.verificationErrors.append(str(e))
         
         t = AdminLoginTest.AdminLoginTest(self.base_url)
         t.test_admin_login()
-        t.tearDown()
+        try: t.tearDown()
+        except AssertionError as e: self.verificationErrors.append(str(e))
         
         t = SetupContestTest.SetupContestTest(self.base_url)
         t.test_setup_contest_test()
-        t.tearDown()
+        try: t.tearDown()
+        except AssertionError as e: self.verificationErrors.append(str(e))
         #contest setup has so many functions that a comprehensive set of tests to make sure everything works has not been made yet.
         
         t = SetupProblemsTest.SetupProblemsTest(self.base_url)
         t.test_setup_problems_test()
-        t.tearDown()
+        try: t.tearDown()
+        except AssertionError as e: self.verificationErrors.append(str(e))
         
         t = AddEditDeleteProblems.AddEditDeleteProblems(self.base_url)
         t.test_add_edit_delete_problems()
-        t.tearDown()
+        try: t.tearDown()
+        except AssertionError as e: self.verificationErrors.append(str(e))
         
         t = DataSetsAndProblems.DataSetsAndProblems(self.base_url)
         t.test_data_sets_and_problems()
-        t.tearDown()
+        try: t.tearDown()
+        except AssertionError as e: self.verificationErrors.append(str(e))
         
         t = SetupSiteTest.SetupSiteTest(self.base_url)
         t.test_setup_site_test()
-        t.tearDown()
+        try: t.tearDown()
+        except AssertionError as e: self.verificationErrors.append(str(e))
         
         t = AddEditDeleteSites.AddEditDeleteSites(self.base_url)
         t.test_add_edit_delete_sites
-        t.tearDown()
+        try: t.tearDown()
+        except AssertionError as e: self.verificationErrors.append(str(e))
         
         t = SetupTeamsTest.SetupTeamsTest(self.base_url)
         t.test_setup_team_test()
-        t.tearDown()
+        try: t.tearDown()
+        except AssertionError as e: self.verificationErrors.append(str(e))
         
         t = AddEditDeleteTeams.AddEditDeleteTeams(self.base_url)
         t.test_add_edit_delete_teams
-        t.tearDown()
+        try: t.tearDown()
+        except AssertionError as e: self.verificationErrors.append(str(e))
         
         t = SetupCategoriesTest.SetupCategoriesTest(self.base_url)
         t.test_setup_categories_test()
-        t.tearDown()
+        try: t.tearDown()
+        except AssertionError as e: self.verificationErrors.append(str(e))
         
         t = SetupHeadersForbiddenTest.SetupHeadersForbiddenTest(self.base_url)
         t.test_setup_headers_forbidden()
-        t.tearDown()
+        try: t.tearDown()
+        except AssertionError as e: self.verificationErrors.append(str(e))
         #there currently is no test which tries to add and remove words from the lists of standard headers or forbidden words.
         
         t = MiscTest.MiscTest(self.base_url)
         t.test_misc()
-        t.tearDown()
+        try: t.tearDown()
+        except AssertionError as e: self.verificationErrors.append(str(e))
         #misc has so many functions that a comprehensive set of tests to make sure everything works has not been made yet.
         
         t = TestAndStart.TestAndStart(self.base_url)
         t.test_and_start()
-        t.tearDown()
+        try: t.tearDown()
+        except AssertionError as e: self.verificationErrors.append(str(e))
         
         
         #judge and team tests get mixed together here unless they can be separated.
         t = clarifications.clarifications(self.base_url)
         t.test_clarifications()
-        t.tearDown()
+        try: t.tearDown()
+        except AssertionError as e: self.verificationErrors.append(str(e))
         
         t = ContestantSubmissionTests.ContestantSubmissionTests(self.base_url)
         t.test_contestant_submissions()
-        t.tearDown()
+        try: t.tearDown()
+        except AssertionError as e: self.verificationErrors.append(str(e))
         
 #this is also common to all the auto-generated code.
 if __name__ == "__main__":
