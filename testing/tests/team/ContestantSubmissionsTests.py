@@ -26,7 +26,7 @@ class ContestantSubmissionsTest(unittest.TestCase):
 # Begin test.
 # !!! How do we test the time display?
 # Open team sign-in page: username = "team1", password = "password"
-driver.get(self.base_url + "/~touche/test_contest/index.php")
+driver.get(self.base_url + "/index.php")
 driver.find_element_by_name("user").clear()
 driver.find_element_by_name("user").send_keys("team1")
 driver.find_element_by_name("password").clear()
@@ -71,7 +71,7 @@ driver.find_element_by_css_selector("input[type=\"submit\"]").click()
 self.assertEqual("Queued for judging", driver.find_element_by_xpath("//table[3]/tbody/tr[3]/td[3]/font").text)
 
 # Runing through the same set of instructions for team2
-driver.get(self.base_url + "/~touche/test_contest/index.php")
+driver.get(self.base_url + "/index.php")
 driver.find_element_by_name("user").clear()
 driver.find_element_by_name("user").send_keys("team2")
 driver.find_element_by_name("password").clear()
@@ -119,7 +119,7 @@ self.assertEqual("Queued for judging", driver.find_element_by_xpath("//table[3]/
 # Moving to judge's page to generate feedback to display for the teams
 #     !!! Need to add tests to check submissions for corruptions
 #     !!! Need to add tests to check submissions remain paired with corresponding problems
-driver.get(self.base_url + "/~touche/test_contest/judge/index.php")
+driver.get(self.base_url + "/judge/index.php")
 driver.find_element_by_name("user").clear()
 driver.find_element_by_name("user").send_keys("judge")
 driver.find_element_by_name("password").clear()
@@ -145,7 +145,7 @@ driver.find_element_by_name("submit").click()
 
 
 # Moving back to team1 page to resubmit "corrected" submissions
-driver.get(self.base_url + "/~touche/test_contest/index.php")
+driver.get(self.base_url + "/index.php")
 driver.find_element_by_name("user").clear()
 driver.find_element_by_name("user").send_keys("team1")
 driver.find_element_by_name("password").clear()
@@ -162,7 +162,7 @@ driver.find_element_by_css_selector("input[type=\"submit\"]").click()
 
 
 # Back to judge... to accept team1's resubmissions
-driver.get(self.base_url + "/~touche/test_contest/judge/index.php")
+driver.get(self.base_url + "/judge/index.php")
 driver.find_element_by_name("user").clear()
 driver.find_element_by_name("user").send_keys("judge")
 driver.find_element_by_name("password").clear()
@@ -178,7 +178,7 @@ driver.find_element_by_name("submit").click()
 
 
 # Back to team1... Checking the scoring displays
-driver.get(self.base_url + "/~touche/test_contest/index.php")
+driver.get(self.base_url + "/index.php")
 driver.find_element_by_name("user").clear()
 driver.find_element_by_name("user").send_keys("team1")
 driver.find_element_by_name("password").clear()
@@ -190,24 +190,36 @@ driver.find_element_by_link_text("Standings").click()
 try: self.assertRegexpMatches(driver.find_element_by_xpath("//td[3]/font").text, r"^[\s\S]*/2$")
 except AssertionError as e: self.verificationErrors.append(str(e))
 sliceMeProb1 = driver.find_element_by_xpath("//td[3]/font").text
+
 # ERROR: Caught exception [ERROR: Unsupported command [getEval | String(storedVars['sliceMeProb1']).slice(3,5) | ]]
-# ERROR: Caught exception [ERROR: Unsupported command [getEval | storedVars['prob1minutes'] =='01' | ]]
+prob1minutes = int(sliceMeProb1[3:5])
+
 try: self.assertRegexpMatches(driver.find_element_by_xpath("//td[4]/font").text, r"^[\s\S]*/2$")
 except AssertionError as e: self.verificationErrors.append(str(e))
 sliceMeProb2 = driver.find_element_by_xpath("//td[4]/font").text
+
 # ERROR: Caught exception [ERROR: Unsupported command [getEval | String(storedVars['sliceMeProb2']).slice(3,5) | ]]
-# ERROR: Caught exception [ERROR: Unsupported command [getEval | storedVars['prob2minutes'] =='01' | ]]
+prob2minutes = int(string(sliceMeProb2)[3:5])
+
 # ERROR: Caught exception [ERROR: Unsupported command [getEval | parseInt(storedVars['prob1minutes']) + parseInt(storedVars['prob2minutes']) | ]]
+combinedMinutes = prob1Minutes + prob2Mintues
+
 sliceMeTotalScore = driver.find_element_by_xpath("//tr[3]/td[5]").text
+
 # ERROR: Caught exception [ERROR: Unsupported command [getEval | String(storedVars['sliceMeTotalScore']).slice(5,7) | ]]
+displayedScore = int(string(sliceMeTotalScore)[5:7])
+
 #     We're adding 40 because we know there were 2 incorrect submission, costing 20 minutes each
+
 # ERROR: Caught exception [ERROR: Unsupported command [getEval | ${combinedMinutes} + 40 | ]]
+calculatedScore = combinedMinutes + 40
+
 # ERROR: Caught exception [ERROR: Unsupported command [getEval | storedVars['displayedScore'] == storedVars['calculatedScore'] | ]]
+try: self.eq(calculatedScore, displayedScore)
+except AssertionError as e: self.verificationErrors.append(str(e))
+
 #     !!! Should check for team2 submissions, too
 
-
-# !!! Add clarifications page tests
-# !!! Add readme page tests
     
     def is_element_present(self, how, what):
         try: self.driver.find_element(by=how, value=what)

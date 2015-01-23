@@ -9,16 +9,16 @@ import unittest, time, re
 
 class SubmitAndJudgeManyProblems(unittest.TestCase):
     def setUp(self):
-        self.driver = webdriver.PhantomJS("/usr/local/bin/phantomjs")
+        self.driver = webdriver.Firefox()
         self.driver.implicitly_wait(30)
-        self.base_url = "http://localhost"
+        self.base_url = url
         self.verificationErrors = []
         self.accept_next_alert = True
         self.driver.set_file_detector(LocalFileDetector())
     
     def test_submit_and_judge_many_problems(self):
         driver = self.driver
-        driver.get(self.base_url + "/~mgoldsbe/ourContest/index.php")
+        driver.get(self.base_url + "/index.php")
         driver.find_element_by_name("user").clear()
         driver.find_element_by_name("user").send_keys("team1")
         driver.find_element_by_name("password").clear()
@@ -41,7 +41,7 @@ class SubmitAndJudgeManyProblems(unittest.TestCase):
         driver.find_element_by_name("source_file").send_keys("../../uploadableFiles/empty.java")
         driver.find_element_by_css_selector("input[type=\"submit\"]").click()
         self.assertEqual("Queued for judging", driver.find_element_by_xpath("//table[3]/tbody/tr[3]/td[3]/font").text)
-        driver.get(self.base_url + "/~mgoldsbe/ourContest/index.php")
+        driver.get(self.base_url + "/index.php")
         driver.find_element_by_name("user").clear()
         driver.find_element_by_name("user").send_keys("team2")
         driver.find_element_by_name("password").clear()
@@ -64,7 +64,7 @@ class SubmitAndJudgeManyProblems(unittest.TestCase):
         driver.find_element_by_name("source_file").send_keys("../../uploadableFiles/empty.java")
         driver.find_element_by_css_selector("input[type=\"submit\"]").click()
         self.assertEqual("Queued for judging", driver.find_element_by_xpath("//table[3]/tbody/tr[3]/td[3]/font").text)
-        driver.get(self.base_url + "/~mgoldsbe/ourContest/judge/index.php")
+        driver.get(self.base_url + "/judge/index.php")
         driver.find_element_by_name("user").clear()
         driver.find_element_by_name("user").send_keys("judge")
         driver.find_element_by_name("password").clear()
@@ -86,7 +86,7 @@ class SubmitAndJudgeManyProblems(unittest.TestCase):
         driver.find_element_by_link_text("judge submission").click()
         Select(driver.find_element_by_name("result")).select_by_visible_text("Incorrect Output")
         driver.find_element_by_name("submit").click()
-        driver.get(self.base_url + "/~mgoldsbe/ourContest/index.php")
+        driver.get(self.base_url + "/index.php")
         driver.find_element_by_name("user").clear()
         driver.find_element_by_name("user").send_keys("team1")
         driver.find_element_by_name("password").clear()
@@ -100,7 +100,7 @@ class SubmitAndJudgeManyProblems(unittest.TestCase):
         driver.find_element_by_name("source_file").clear()
         driver.find_element_by_name("source_file").send_keys("../../uploadableFiles/empty.java")
         driver.find_element_by_css_selector("input[type=\"submit\"]").click()
-        driver.get(self.base_url + "~mgoldsbe/ourContest/judge/index.php")
+        driver.get(self.base_url + "/judge/index.php")
         driver.find_element_by_name("user").clear()
         driver.find_element_by_name("user").send_keys("judge")
         driver.find_element_by_name("password").clear()
@@ -113,7 +113,7 @@ class SubmitAndJudgeManyProblems(unittest.TestCase):
         driver.find_element_by_link_text("judge submission").click()
         Select(driver.find_element_by_name("result")).select_by_visible_text("Accepted")
         driver.find_element_by_name("submit").click()
-        driver.get(self.base_url + "~mgoldsbe/ourContest/index.php")
+        driver.get(self.base_url + "/index.php")
         driver.find_element_by_name("user").clear()
         driver.find_element_by_name("user").send_keys("team1")
         driver.find_element_by_name("password").clear()
