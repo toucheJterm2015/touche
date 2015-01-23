@@ -9,13 +9,13 @@ from selenium.common.exceptions import NoAlertPresentException
 import unittest, time, re
 
 class AddEditDeleteProblems(unittest.TestCase):
-    def __init__(self):
-        self.setUp()
-    
-    def setUp(self):
+    def __init__(self, url):
+        self.setUp(url)
+
+    def setUp(self, url):
         self.driver = webdriver.PhantomJS("/usr/local/bin/phantomjs")
         self.driver.implicitly_wait(30)
-        self.base_url = "http://localhost/~touche/Test_Contest"
+        self.base_url = url
         self.verificationErrors = []
         self.accept_next_alert = True
     

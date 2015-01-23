@@ -8,19 +8,19 @@ from selenium.common.exceptions import NoAlertPresentException
 import unittest, time, re
 
 class CreateContestTests(unittest.TestCase):
-    def __init__(self):
-        self.setUp()
+    def __init__(self, url):
+        self.setUp(url)
 
-    def setUp(self):
+    def setUp(self, url):
         self.driver = webdriver.PhantomJS("/usr/local/bin/phantomjs")
         self.driver.implicitly_wait(30)
-        self.base_url = "http://touche.cse.taylor.edu/"
+        self.base_url = url
         self.verificationErrors = []
         self.accept_next_alert = True
     
     def test_create_contest_tests(self):
         driver = self.driver
-        driver.get(self.base_url + "/~touche/index.php")
+        driver.get(self.base_url + "/index.php")
         try: self.assertRegexpMatches(driver.find_element_by_css_selector("h2").text, r"^[\s\S]*Welcome to Touche[\s\S]*$")
         except AssertionError as e: self.verificationErrors.append(str(e))
         driver.find_element_by_name("user").clear()
@@ -43,26 +43,30 @@ class CreateContestTests(unittest.TestCase):
         driver.find_element_by_name("dbhost").send_keys("localhost")
         driver.find_element_by_name("dbpassword").clear()
         driver.find_element_by_name("dbpassword").send_keys("password")
+        driver.find_element_by_name("B1").click()
         # ERROR: Caught exception [unknown command [clickandWait]]
-        for i in range(60):
-            try:
-                if r"^[\s\S]*Finished[\s\S]*$" == driver.find_element_by_tag_name("BODY").text: break
-            except: pass
-            time.sleep(10)#this takes for-freaking-ever, so make the loop longer. What's really important is the content of the next page.
-        else: self.fail("time out")
+        driver.implicitly_wait(600)
+#        for i in range(60):
+#            try:
+#                if r"^[\s\S]*Finished[\s\S]*$" == driver.find_element_by_tag_name("BODY").text: break
+#            except: pass
+#            time.sleep(10)#this takes for-freaking-ever, so make the loop longer. What's really important is the content of the next page.
+#        else: self.fail("time out")
         try: self.assertNotEqual(r"^[\s\S]*Unable[\s\S]*$", driver.find_element_by_tag_name("BODY").text)
         except AssertionError as e: self.verificationErrors.append(str(e))
         try: self.assertNotEqual(r"^[\s\S]*Something happened[\s\S]*$", driver.find_element_by_tag_name("BODY").text)
         except AssertionError as e: self.verificationErrors.append(str(e))
         driver.find_element_by_link_text("Administration setup").click()
-        try: self.assertEqual(r"^[\s\S]*Admin Login[\s\S]*$", driver.find_element_by_tag_name("BODY").text)
+        try: self.assertEqual(r"Admin Login", driver.find_element_by_tag_name("BODY").text)
         except AssertionError as e: self.verificationErrors.append(str(e))
+        #self.assertEqual(r"Admin Login", driver.find_element_by_tag_name("BODY").text)
+        driver.implicitly_wait(30)
         driver.find_element_by_name("user").clear()
         driver.find_element_by_name("user").send_keys("admin")
         driver.find_element_by_name("password").clear()
         driver.find_element_by_name("password").send_keys("password")
         driver.find_element_by_name("submit").click()
-        try: self.assertEqual(r"^[\s\S]*Admin Login[\s\S]*$", driver.find_element_by_tag_name("BODY").text)#the original password for a new admin is admin
+        try: self.assertEqual(r"Admin Login", driver.find_element_by_tag_name("BODY").text)#the original password for a new admin is admin
         except AssertionError as e: self.verificationErrors.append(str(e))
         driver.find_element_by_name("user").clear()
         driver.find_element_by_name("user").send_keys("admin")
