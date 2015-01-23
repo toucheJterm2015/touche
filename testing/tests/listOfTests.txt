@@ -1,6 +1,8 @@
-(enhancements from the issues log on github are not included, but everything else is)
-(for the most part things are organized by role, and then by page)
-(An x at the beginning of a line means that we think there is a test for that)
+enhancements from the issues log on github are not included, but everything else is
+
+for the most part things are organized by user type, and then by page
+
+An x at the beginning of a line means that we have written a test for that. A - is just a stand in for a bullet point and implies that the test or tests are not yet written.
 
 I DONT KNOW WHERE THESE GO 
 Java logs get overwritten

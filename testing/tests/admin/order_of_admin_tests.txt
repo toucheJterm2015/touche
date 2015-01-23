@@ -1,5 +1,7 @@
 We might eventually combine all the admin tests into one huge file to avoid logging in every single time, and so a final destructor can take everything away again. In case we don't get that far, here is the intended order for running tests
 
+x means tests have been written for that page, o means not.
+
 1. create contest
 2. create contest 2
 3. login (1)
@@ -8,6 +10,7 @@ We might eventually combine all the admin tests into one huge file to avoid logg
 6. details (presence & functionality. Sometimes these are combined, sometimes separate.)
 7. problems (p&f)
 8 - 15. go down the navbar in order.
+16. page for details of a contest which has been re-judged (option on Misc page)
 
 Those written:
 x 1
@@ -25,6 +28,7 @@ xo 12
 xo 13
 xo 14
 xx 15
+o 16
 
 included in master:
 x 1
@@ -41,4 +45,5 @@ xx 11
 xo 12
 xo 13
 xo 14
-oo 15
+xx 15
+o 16

@@ -1,34 +1,10 @@
-For directions on installing Touche, see that installation docs in the
-/documentation/ folder of this repository.
+The content of the old README has been moved to /documentation/symbolicLinksSetup.
 
-Using the Touche repository in a live system.  After cloning the
-repository, it should be in a location that is not directly accessible
-to the web server you've installed.  The easiest way to use the
-repository is to set up symbolic links in the right locations to the
-files inside.  Here are the links that need to be done (all
-directories are relative to the contest user and assume the repository
-is in a directory named src):
+Everything you might want to know about the state of the project is within the documentation folder. We recommend developers read aNoteAboutTheStateOfTheTests, bugs, jails documentation, the symbolicLinksSetup, and the newest Installation-And-Setup-Instructions (currently Version 3). You can read the old Installation-And-Setup-Instructions, but those are there more for legacy than because you need them. The current version is sufficient on its own.
 
-    ln -s ~/src/develop develop
-    ln -s ~/src/public_html/develop public_html/develop
-	ln -s ~/src/public_html/lib/
-    ln ~/src/public_html/createcontest.php public_html/createcontest.php
-    ln ~/src/public_html/createcontest2.php public_html/createcontest2.php
-    ln ~/src/public_html/index.html public_html/index.html
-    ln -s ~/src/public_html/dbcreate.sql public_html/dbcreate.sql
-    ln -s ~/src/public_html/readme public_html/readme
-    ln -s ~/src/public_html/lib public_html/lib
-    ln -s ~/src/master-crontab.cron master-crontab.cron
-    ln -s ~/src/jails jails
+People who are using the code and running contests probably only need the Installation and Setup Instructions and the symbolic links setup from within the documentation folder.
 
-We cannot use symbolic links for the `createcontest` scripts since
-they are directly executed by the web server and we use suexec, which
-doesn't work over links and so it needs to be hard linked.  This
-probably isn't an issue since the two locations are probably on the
-same mount point.  Otherwise, you'll have to use a copy instead.  If
-you use a copy, be sure that any time those scripts are updated that they
-get copied into the web server spot properly and that can be easy to
-forget when using version control since it might not explicitly remind
-to do so.
+In the most recent updates, we began writing a testing framework for Touche so it is easy to catch if updates break things. Today (Jan. 23, 2015) it is still incomplete and our class has ended. However, all of the testing python files are pretty well commented (which tests fail and what we expect) and the listOfTests (found in the /testing/tests folder - intended to be a checklist of all the tests the contest will need in order to make sure EVERYTHING works, including atypical user input) contains notes on what is and is not tested for yet. Feel free to add anything we left out. Ideally, in the end, that will be not only a list of things that should be tested, but a list of things that have been tested and are tested for, to maintain good communication with all future developers.
 
-More documents should be created and pointed to with this README!!!
+That should be all you need to know. Happy coding.
+~Matt, Nate, and Mel, J-Term 2015
