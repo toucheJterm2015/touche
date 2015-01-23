@@ -11,6 +11,7 @@ from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import NoAlertPresentException
 import unittest, time, re
 from admin import *
+from team import *
 import config
 
 class MasterTestTouche(unittest.TestCase):
@@ -54,26 +55,77 @@ class MasterTestTouche(unittest.TestCase):
         #setup and admin tests
         t = CreateContestTests.CreateContestTests(self.base_url)
         t.test_create_contest_tests()
-        #t.tearDown()
+        t.tearDown()
         self.base_url = config.base_url + "Test_Contest"
         
-        DataSetsAndProblems.DataSetsAndProblems(self.base_url).test_data_sets_and_problems()
-        AdminLoginTest.AdminLoginTest(self.base_url).test_admin_login()
-        SetupContestTest.SetupContestTest(self.base_url).test_setup_contest_test()
+        t = DataSetsAndProblems.DataSetsAndProblems(self.base_url)
+        t.test_data_sets_and_problems()
+        t.tearDown()
+        
+        t = AdminLoginTest.AdminLoginTest(self.base_url)
+        t.test_admin_login()
+        t.tearDown()
+        
+        t = SetupContestTest.SetupContestTest(self.base_url)
+        t.test_setup_contest_test()
+        t.tearDown()
         #contest setup has so many functions that a comprehensive set of tests to make sure everything works has not been made yet.
-        SetupProblemsTest.SetupProblemsTest(self.base_url).test_setup_problems_test()
-        AddEditDeleteProblems.AddEditDeleteProblems(self.base_url).test_add_edit_delete_problems()
-        DataSetsAndProblems.DataSetsAndProblems(self.base_url).test_data_sets_and_problems()
-        SetupSiteTest.SetupSiteTest(self.base_url).test_setup_site_test()
-        AddEditDeleteSites.AddEditDeleteSites(self.base_url).test_add_edit_delete_sites
-        SetupTeamsTest.SetupTeamsTest(self.base_url).test_setup_team_test()
-        AddEditDeleteTeams.AddEditDeleteTeams(self.base_url).test_add_edit_delete_teams
-        SetupCategoriesTest.SetupCategoriesTest(self.base_url).test_setup_categories_test()
-        SetupHeadersForbiddenTest.SetupHeadersForbiddenTest(self.base_url).test_setup_headers_forbidden()
+        
+        t = SetupProblemsTest.SetupProblemsTest(self.base_url)
+        t.test_setup_problems_test()
+        t.tearDown()
+        
+        t = AddEditDeleteProblems.AddEditDeleteProblems(self.base_url)
+        t.test_add_edit_delete_problems()
+        t.tearDown()
+        
+        t = DataSetsAndProblems.DataSetsAndProblems(self.base_url)
+        t.test_data_sets_and_problems()
+        t.tearDown()
+        
+        t = SetupSiteTest.SetupSiteTest(self.base_url)
+        t.test_setup_site_test()
+        t.tearDown()
+        
+        t = AddEditDeleteSites.AddEditDeleteSites(self.base_url)
+        t.test_add_edit_delete_sites
+        t.tearDown()
+        
+        t = SetupTeamsTest.SetupTeamsTest(self.base_url)
+        t.test_setup_team_test()
+        t.tearDown()
+        
+        t = AddEditDeleteTeams.AddEditDeleteTeams(self.base_url)
+        t.test_add_edit_delete_teams
+        t.tearDown()
+        
+        t = SetupCategoriesTest.SetupCategoriesTest(self.base_url)
+        t.test_setup_categories_test()
+        t.tearDown()
+        
+        t = SetupHeadersForbiddenTest.SetupHeadersForbiddenTest(self.base_url)
+        t.test_setup_headers_forbidden()
+        t.tearDown()
         #there currently is no test which tries to add and remove words from the lists of standard headers or forbidden words.
-        MiscTest.MiscTest(self.base_url).test_misc()
+        
+        t = MiscTest.MiscTest(self.base_url)
+        t.test_misc()
+        t.tearDown()
         #misc has so many functions that a comprehensive set of tests to make sure everything works has not been made yet.
-        TestAndStart.TestAndStart(self.base_url).test_and_start()
+        
+        t = TestAndStart.TestAndStart(self.base_url)
+        t.test_and_start()
+        t.tearDown()
+        
+        
+        #judge and team tests get mixed together here unless they can be separated.
+        t = clarifications.clarifications(self.base_url)
+        t.test_clarifications()
+        t.tearDown()
+        
+        t = ContestantSubmissionTests.ContestantSubmissionTests(self.base_url)
+        t.test_contestant_submissions()
+        t.tearDown()
         
 #this is also common to all the auto-generated code.
 if __name__ == "__main__":
